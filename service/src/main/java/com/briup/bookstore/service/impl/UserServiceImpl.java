@@ -177,8 +177,10 @@ public class UserServiceImpl implements UserService{
         String id = (String) JsonWebTokenUtils.parseJWT(token).get("sub");
         //根据用户ID查询用户信息
         User user = userMapper.getUserById(Integer.parseInt(id));
+        //bean拷贝
+        UserInfoVO userInfoVO = BeanCopyUtils.copyBean(user, UserInfoVO.class);
         //返回统一响应结果
-        return Result.success(user);
+        return Result.success(userInfoVO);
     }
 }
 
