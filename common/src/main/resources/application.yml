@@ -1,25 +1,23 @@
 spring:
-  # 配置数据源
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://10.0.1.183:3306/estore?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-    url: jdbc:mysql://localhost:3306/book_store?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-    username: root
-    password: root
+  # 文件上传大小限制
+  servlet:
+    multipart:
+      # 单个文件最大限制
+      max-file-size: 5MB
+      # 单次请求文件最大限制
+      max-request-size: 5MB
+  # 配置路径匹配策略为ant风格
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
-# Mybatis配置
-mybatis:
-  # 配置XML映射文件中指定的实体类别名路径
-  type-aliases-package: com.briup.bean
-  # 配置MyBatis的xml配置文件路径
-  mapper-locations: classpath:mappers/*.xml
-  # 开启驼峰uName自动映射到u_name
-  configuration:
-    map-underscore-to-camel-case: true
-
-# 配置Mybatis日志输出为debug
-logging:
-  level:
-    com:
-      briup:
-        mapper: debug
+# 配置七牛云OSS对象存储
+oss:
+  # 配置AK
+  accessKey: IkpGPlDZBWx9IppOrhrzRs1U9bVqWP2OvgaIMjwI
+  # 配置SK
+  secretKey: 4zMtIlfDE9AQYXM2nPnCey4zuSP_x5yyvHWxUl2K
+  # 配置桶
+  bucket: bbs-school-system
+  # 配置基础域名
+  baseUrl: http://www.qinyc.xyz/

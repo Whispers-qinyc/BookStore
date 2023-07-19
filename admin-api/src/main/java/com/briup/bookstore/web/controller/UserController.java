@@ -67,4 +67,16 @@ public class UserController {
     public Result updateUserStatus(@RequestBody AdminUpdateUserStatusDTO updateUserStatusDTO){
         return userService.updateUserStatus(updateUserStatusDTO);
     }
+
+    /**
+     * @Author qinyc
+     * @Description  删除与批量删除用户
+     * @version: v1.0
+     * @Date 13:43 2023/7/19
+     **/
+    @ApiOperation("删除与批量删除用户")
+    @DeleteMapping("/deleteUser/{ids}")
+    public Result deleteUser(@PathVariable("ids") String ids){
+        return userService.deleteUser(ids);
+    }
 }
