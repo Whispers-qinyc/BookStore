@@ -41,17 +41,17 @@ public class AdminCheckLoginInterceptor implements HandlerInterceptor {
         //判断Token是否存在
         if (!StringUtils.hasText(request.getHeader("token"))){
             //没有Token
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.ADMIN_IS_NOT_LOGIN);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_IS_NOT_LOGIN);
         }
         //token存在
         try {
             JsonWebTokenUtils.parseJWT(request.getHeader("token"));
         } catch (ExpiredJwtException e) {
             //管理员登录过期
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.ADMIN_LOGIN_TIMEOUT);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_LOGIN_TIMEOUT);
         }catch (MalformedJwtException e){
             //管理员令牌失效
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.ADMIN_TOKEN_IS_INVALID);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_TOKEN_IS_INVALID);
         }catch (Exception e){
             //服务器内部错误
             throw new BookStoreException(BookStoreException.CodeMsgEnum.ERROR);

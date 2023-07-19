@@ -1,6 +1,7 @@
 package com.briup.bookstore.web.controller;
 
 import com.briup.bookstore.dto.AdminAddUserDTO;
+import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
 import io.swagger.annotations.Api;
@@ -53,5 +54,17 @@ public class UserController {
     @PostMapping("/addUser")
     public Result addUser(@RequestBody AdminAddUserDTO addUserDTO){
         return userService.addUser(addUserDTO);
+    }
+
+    /**
+     * @Author qinyc
+     * @Description  修改用户状态
+     * @version: v1.0
+     * @Date 11:24 2023/7/19
+     **/
+    @ApiOperation("修改用户状态")
+    @PutMapping("/updateUserStatus")
+    public Result updateUserStatus(@RequestBody AdminUpdateUserStatusDTO updateUserStatusDTO){
+        return userService.updateUserStatus(updateUserStatusDTO);
     }
 }

@@ -3,6 +3,7 @@ package com.briup.bookstore.service.impl;
 import com.briup.bookstore.constant.BookStoreConstant;
 import com.briup.bookstore.dto.AdminAddUserDTO;
 import com.briup.bookstore.dto.AdminLoginDTO;
+import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
 import com.briup.bookstore.exception.BookStoreException;
 import com.briup.bookstore.mapper.UserMapper;
 import com.briup.bookstore.po.User;
@@ -41,16 +42,16 @@ public class UserServiceImpl implements UserService{
     public Result adminLogin(AdminLoginDTO adminLoginDTO) {
         //判断用户名是否为空
         if (!StringUtils.hasText(adminLoginDTO.getUsername())){
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.ADMIN_USERNAME_IS_NOT_NULL);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_NOT_NULL);
         }
         //判断密码是否为空
         if (!StringUtils.hasText(adminLoginDTO.getPassword())){
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.ADMIN_PASSWORD_IS_NOT_NULL);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_PASSWORD_IS_NOT_NULL);
         }
         //判断用户名密码是否正确
         User user = userMapper.getUserByUsernameAndPassword(adminLoginDTO.getUsername(),adminLoginDTO.getPassword());
         if (Objects.isNull(user)){
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.ADMIN_USERNAME_OR_PASSWORD_ERROR);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_OR_PASSWORD_ERROR);
         }
         //用户名和密码均正确
         //验证是否为管理员身份
@@ -105,11 +106,27 @@ public class UserServiceImpl implements UserService{
         if (count != 0){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_EXIST);
         }
-        //Bean拷贝
-        User user = BeanCopyUtils.copyBean(addUserDTO, User.class);
         //执行新增用户操作
-        userMapper.insertUser(user);
+        userMapper.insertUser(addUserDTO);
         //返回响应成功响应
+        return Result.success();
+    }
+
+    /**
+     * @Author qinyc
+     * @Description  修改用户状态
+     * @version: v1.0
+     * @Date 11:32 2023/7/19
+     **/
+    @Override
+    public Result updateUserStatus(AdminUpdateUserStatusDTO updateUserStatusDTO) {
+        if (Objects.isNull(updateUserStatusDTO)){
+            //id为空
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_ID_IS_NOT_NULL);
+        }
+        //修改用户状态
+        userMapper.updateUserStatus(updateUserStatusDTO);
+        //返回响应成功
         return Result.success();
     }
 }

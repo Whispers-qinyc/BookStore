@@ -2,6 +2,7 @@ package com.briup.bookstore.service;
 
 import com.briup.bookstore.dto.AdminAddUserDTO;
 import com.briup.bookstore.dto.AdminLoginDTO;
+import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
 import com.briup.bookstore.response.Result;
 
 /**
@@ -34,4 +35,12 @@ public interface UserService{
      * @Date 10:05 2023/7/19
      **/
     Result addUser(AdminAddUserDTO addUserDTO);
+
+    /**
+     * @Author qinyc
+     * @Description  修改用户状态
+     * @version: v1.0
+     * @Date 11:32 2023/7/19
+     **/
+    Result updateUserStatus(AdminUpdateUserStatusDTO updateUserStatusDTO);
 }

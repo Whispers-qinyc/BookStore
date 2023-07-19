@@ -9,14 +9,14 @@ import lombok.experimental.Accessors;
 
 /**
  * 
- * @TableName es_order_tiem
+ * @TableName es_order_item
  */
 @ApiModel("订单项实体")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class OrderTiem{
+public class OrderItem{
     /**
      * 订单项编号
      */
