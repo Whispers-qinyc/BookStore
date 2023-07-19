@@ -42,8 +42,7 @@ public class BookStoreException extends  RuntimeException {
         this.msg = msg;
     }
 
-    public  enum CodeMsgEnum {
-
+    public enum CodeMsgEnum {
         //响应失败
         ERROR(500,"服务器内部错误"),
 
@@ -88,6 +87,9 @@ public class BookStoreException extends  RuntimeException {
 
         //用户的用户名已存在
         USER_USERNAME_IS_EXIST(514,"用户的用户名已存在"),
+
+        //登录账号非管理员账号
+        LOGIN_IS_NOT_ADMIN(515,"登录账号非管理员账号")
         ;
 
 

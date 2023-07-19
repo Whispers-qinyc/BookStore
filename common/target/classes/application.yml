@@ -1,0 +1,25 @@
+spring:
+  # 配置数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://10.0.1.183:3306/estore?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/book_store?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: root
+
+# Mybatis配置
+mybatis:
+  # 配置XML映射文件中指定的实体类别名路径
+  type-aliases-package: com.briup.bean
+  # 配置MyBatis的xml配置文件路径
+  mapper-locations: classpath:mappers/*.xml
+  # 开启驼峰uName自动映射到u_name
+  configuration:
+    map-underscore-to-camel-case: true
+
+# 配置Mybatis日志输出为debug
+logging:
+  level:
+    com:
+      briup:
+        mapper: debug

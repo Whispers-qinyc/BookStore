@@ -34,7 +34,7 @@ public class Result <T>{
     //成功静态方法
     public static <T> Result success(T data) {
         Result r = new Result();
-        r.setCode(20000);
+        r.setCode(200);
         r.setMessage("ok");
         r.setData(data);
         return r;

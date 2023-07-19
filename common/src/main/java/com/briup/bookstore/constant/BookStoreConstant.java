@@ -46,5 +46,10 @@ public class BookStoreConstant {
     public static final String SIGN_TYPE = "RSA2";
 
 
+    /*
+     * 登录用户为管理员
+     */
+    public static final Integer LOGIN_ADMIN = 1;
+
 
 }
