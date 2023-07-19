@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @className: UserController
@@ -25,6 +26,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
     /**
      * @Author qinyc
@@ -78,5 +80,18 @@ public class UserController {
     @DeleteMapping("/deleteUser/{ids}")
     public Result deleteUser(@PathVariable("ids") String ids){
         return userService.deleteUser(ids);
+    }
+
+
+    /**
+     * @Author qinyc
+     * @Description  获取用户个人信息
+     * @version: v1.0
+     * @Date 15:31 2023/7/19
+     **/
+    @ApiOperation("获取用户个人信息")
+    @GetMapping("/getUserInfo")
+    public Result getUserInfo(@RequestHeader("token") @ApiIgnore String token) throws Exception {
+        return userService.getUserInfo(token);
     }
 }

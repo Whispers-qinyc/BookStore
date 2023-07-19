@@ -51,4 +51,12 @@ public interface UserService{
      * @Date 14:05 2023/7/19
      **/
     Result deleteUser(String ids);
+
+    /**
+     * @Author qinyc
+     * @Description  获取用户个人信息
+     * @version: v1.0
+     * @Date 15:48 2023/7/19
+     **/
+    Result getUserInfo(String token) throws Exception;
 }

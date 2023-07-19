@@ -45,6 +45,10 @@ public class BookStoreConstant {
 
     public static final String SIGN_TYPE = "RSA2";
 
+    /*
+     * 账号状态为封禁状态
+     */
+    public static final int LOGIN_STATUS_CLOSE = 1;
 
     /*
      * 登录用户为管理员

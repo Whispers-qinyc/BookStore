@@ -85,4 +85,13 @@
         WHERE id IN (${ids})
     </delete>
 
+    <!--根据用户ID查询用户信息-->
+    <select id="getUserById" resultType="com.briup.bookstore.po.User">
+        SELECT
+            <include refid="Base_Column_List"/>
+        from
+            es_user
+        where id = #{id}
+    </select>
+
 </mapper>

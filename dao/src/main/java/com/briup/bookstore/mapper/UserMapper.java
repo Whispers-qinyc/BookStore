@@ -62,6 +62,14 @@ public interface UserMapper {
      * @Date 14:09 2023/7/19
      **/
     void deleteBatchIds(@Param("ids") String ids);
+
+    /**
+     * @Author qinyc
+     * @Description  根据用户ID查询用户信息
+     * @version: v1.0
+     * @Date 15:56 2023/7/19
+     **/
+    User getUserById(int id);
 }
 
 

@@ -12,15 +12,14 @@ import com.briup.bookstore.service.UserService;
 import com.briup.bookstore.utils.BeanCopyUtils;
 import com.briup.bookstore.utils.JsonWebTokenUtils;
 import com.briup.bookstore.vo.AdminGetPageUserVO;
+import com.briup.bookstore.vo.AdminLoginVO;
+import com.briup.bookstore.vo.UserInfoVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.omg.CORBA.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -57,6 +56,10 @@ public class UserServiceImpl implements UserService{
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_OR_PASSWORD_ERROR);
         }
         //用户名和密码均正确
+        //验证账号状态是否为正常状态
+        if (user.getStatus().intValue() == BookStoreConstant.LOGIN_STATUS_CLOSE){
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_STATUS_CLOSE);
+        }
         //验证是否为管理员身份
         if (user.getRoleId().intValue() != BookStoreConstant.LOGIN_ADMIN){
             //非管理员
@@ -64,8 +67,14 @@ public class UserServiceImpl implements UserService{
         }
         //登录者为管理员，根据管理员ID生成JWT
         String jwt = JsonWebTokenUtils.createJWT(user.getId().toString());
+        //Bean拷贝
+        UserInfoVO userInfo = BeanCopyUtils.copyBean(user, UserInfoVO.class);
+        //创建VO对象
+        AdminLoginVO adminLoginVO = new AdminLoginVO();
+        //封装jwt、用户信息在VO对象中
+        adminLoginVO.setJwt(jwt).setUserInfo(userInfo);
         //返回统一响应
-        return Result.success(jwt);
+        return Result.success(adminLoginVO);
     }
 
     /**
@@ -154,6 +163,22 @@ public class UserServiceImpl implements UserService{
         }
         //返回统一响应
         return Result.success();
+    }
+
+    /**
+     * @Author qinyc
+     * @Description  获取用户个人信息
+     * @version: v1.0
+     * @Date 15:48 2023/7/19
+     **/
+    @Override
+    public Result getUserInfo(String token) throws Exception {
+        //从token中解析用户id
+        String id = (String) JsonWebTokenUtils.parseJWT(token).get("sub");
+        //根据用户ID查询用户信息
+        User user = userMapper.getUserById(Integer.parseInt(id));
+        //返回统一响应结果
+        return Result.success(user);
     }
 }
 
