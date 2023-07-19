@@ -81,7 +81,10 @@ public class BookStoreException extends  RuntimeException {
 
 
         //登录账号非管理员账号
-        LOGIN_IS_NOT_ADMIN(515,"登录账号非管理员账号")
+        LOGIN_IS_NOT_ADMIN(512,"登录账号非管理员账号"),
+
+        //删除用户失败，待删除用户存在购物车信息、订单信息、收货地址信息，请检查删除完毕后重试
+        DELETE_USER_FAIL(513,"删除用户失败，待删除用户存在购物车信息、订单信息、收货地址信息，请检查删除完毕后重试")
         ;
 
 

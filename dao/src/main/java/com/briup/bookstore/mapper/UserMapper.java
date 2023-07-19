@@ -54,6 +54,14 @@ public interface UserMapper {
      * @Date 13:37 2023/7/19
      **/
     void updateUserStatus(AdminUpdateUserStatusDTO updateUserStatusDTO);
+
+    /**
+     * @Author qinyc
+     * @Description  删除与批量删除用户
+     * @version: v1.0
+     * @Date 14:09 2023/7/19
+     **/
+    void deleteBatchIds(@Param("ids") String ids);
 }
 
 

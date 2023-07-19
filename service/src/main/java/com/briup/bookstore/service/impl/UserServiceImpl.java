@@ -14,10 +14,13 @@ import com.briup.bookstore.utils.JsonWebTokenUtils;
 import com.briup.bookstore.vo.AdminGetPageUserVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.omg.CORBA.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -127,6 +130,29 @@ public class UserServiceImpl implements UserService{
         //修改用户状态
         userMapper.updateUserStatus(updateUserStatusDTO);
         //返回响应成功
+        return Result.success();
+    }
+
+    /**
+     * @Author qinyc
+     * @Description  删除与批量删除用户
+     * @version: v1.0
+     * @Date 14:04 2023/7/19
+     **/
+    @Override
+    public Result deleteUser(String ids) {
+        //判断ids是否为空
+        if (!StringUtils.hasText(ids)){
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.TO_BE_DELETE_USER_IDS_IS_NOT_NULL);
+        }
+        //批量删除
+        try {
+            userMapper.deleteBatchIds(ids);
+        }catch (Exception e){
+            //遇到异常可能是因为待删除用户有关联的购物车、订单、收货地址信息未被删除
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.DELETE_USER_FAIL);
+        }
+        //返回统一响应
         return Result.success();
     }
 }
