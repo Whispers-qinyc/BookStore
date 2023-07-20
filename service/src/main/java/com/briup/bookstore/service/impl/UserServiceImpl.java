@@ -20,6 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -84,11 +88,27 @@ public class UserServiceImpl implements UserService{
      * @Date 9:21 2023/7/19
      **/
     @Override
-    public Result getPageUser(Integer pageNum, Integer pageSize, String username, String gender) {
+    public Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime) {
+        //初始化开始时间
+        LocalDateTime registerStartTime = null;
+        //初始化结束时间
+        LocalDateTime registerEndTime = null;
+        if (StringUtils.hasText(startTime)){
+            // 解析带有时区信息的日期时间字符串为Instant对象
+            Instant instant = Instant.parse(startTime);
+            // 将Instant对象转换为本地时区的LocalDateTime对象
+            registerStartTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+        }
+        if (StringUtils.hasText(endTime)){
+            // 解析带有时区信息的日期时间字符串为Instant对象
+            Instant instant = Instant.parse(endTime);
+            // 将Instant对象转换为本地时区的LocalDateTime对象
+            registerEndTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+        }
         //开启PageHelper分页插件
         PageHelper.startPage(pageNum,pageSize,true);
         //核心查询
-        List<User> users = userMapper.getAllUserByUsernameOrGender(username, gender);
+        List<User> users = userMapper.getAllUserByUsernameOrStatus0rRegisterTime(username, status,registerStartTime,registerEndTime);
         //Bean拷贝
         List<AdminGetPageUserVO> adminGetPageUserVOS = BeanCopyUtils.copyBeanList(users, AdminGetPageUserVO.class);
         //封装在PageInfo对象中

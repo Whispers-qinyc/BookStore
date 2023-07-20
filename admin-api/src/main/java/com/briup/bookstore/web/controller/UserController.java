@@ -4,13 +4,17 @@ import com.briup.bookstore.dto.AdminAddUserDTO;
 import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.time.LocalDateTime;
 
 /**
  * @className: UserController
@@ -42,8 +46,8 @@ public class UserController {
             @ApiImplicitParam(name = "gender",value = "性别"),
     })
     @GetMapping("/getPageUser")
-    public Result getPageUser(Integer pageNum,Integer pageSize,String username,String gender){
-        return userService.getPageUser(pageNum,pageSize,username,gender);
+    public Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime,String endTime){
+        return userService.getPageUser(pageNum,pageSize,username,status,startTime,endTime);
     }
 
     /**

@@ -5,6 +5,7 @@ import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
 import com.briup.bookstore.po.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,11 +26,11 @@ public interface UserMapper {
 
     /**
      * @Author qinyc
-     * @Description  查询全部用户，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配
+     * @Description  查询全部用户，若存在username，根据username模糊查询，若存在status，根据status精确匹配,registerTime作为范围查询
      * @version: v1.0
      * @Date 9:28 2023/7/19
      **/
-    List<User> getAllUserByUsernameOrGender(@Param("username") String username, @Param("gender") String gender);
+    List<User> getAllUserByUsernameOrStatus0rRegisterTime(@Param("username") String username, @Param("status") String status, @Param("registerStartTime") LocalDateTime registerStartTime, @Param("registerEndTime") LocalDateTime registerEndTime);
 
     /**
      * @Author qinyc

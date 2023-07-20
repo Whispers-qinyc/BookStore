@@ -26,7 +26,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 9:22 2023/7/19
      **/
-    Result getPageUser(Integer pageNum, Integer pageSize, String username, String gender);
+    Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime);
 
     /**
      * @Author qinyc
