@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  分页多条件查询用户信息，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配
+     * @Description  分页多条件查询用户信息
      * @version: v1.0
      * @Date 9:21 2023/7/19
      **/
