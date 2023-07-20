@@ -14,12 +14,12 @@ import lombok.experimental.Accessors;
  * @date: 2023/7/18 22:25
  * @version: v1.0
  */
-@ApiModel("管理员端登录数据传输对象")
+@ApiModel("用户登录数据传输对象")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AdminLoginDTO {
+public class UserLoginDTO {
     /**
      * 登录用户名
      */

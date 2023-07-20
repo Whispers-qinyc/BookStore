@@ -14,12 +14,12 @@ import lombok.experimental.Accessors;
  * @date: 2023/7/19 11:28
  * @version: v1.0
  */
-@ApiModel("管理系统修改用户状态数据传输对象")
+@ApiModel("修改用户状态数据传输对象")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AdminUpdateUserStatusDTO {
+public class UserStatusUpdateDTO {
     /**
      * 主键ID
      */

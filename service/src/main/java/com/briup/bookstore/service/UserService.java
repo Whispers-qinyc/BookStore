@@ -3,6 +3,9 @@ package com.briup.bookstore.service;
 import com.briup.bookstore.dto.AdminAddUserDTO;
 import com.briup.bookstore.dto.AdminLoginDTO;
 import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
+import com.briup.bookstore.dto.UserLoginDTO;
+import com.briup.bookstore.dto.UserRegisterDTO;
+import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.response.Result;
 
 /**
@@ -18,7 +21,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 22:31 2023/7/18
      **/
-    Result adminLogin(AdminLoginDTO adminLoginDTO);
+    Result adminLogin(UserLoginDTO adminLoginDTO);
 
     /**
      * @Author qinyc
@@ -34,7 +37,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 10:05 2023/7/19
      **/
-    Result addUser(AdminAddUserDTO addUserDTO);
+    Result addUser(UserRegisterDTO userRegisterDTO);
 
     /**
      * @Author qinyc
@@ -42,7 +45,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 11:32 2023/7/19
      **/
-    Result updateUserStatus(AdminUpdateUserStatusDTO updateUserStatusDTO);
+    Result updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO);
 
     /**
      * @Author qinyc

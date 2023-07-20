@@ -47,22 +47,22 @@ public class BookStoreException extends  RuntimeException {
         ERROR(500,"服务器内部错误"),
 
         //用户名不能为空
-        USER_USERNAME_IS_NOT_NULL(501,"管理员用户名不能为空"),
+        USER_USERNAME_IS_NOT_NULL(501,"用户名不能为空"),
 
         //密码不能为空
-        USER_PASSWORD_IS_NOT_NULL(502,"管理员密码不能为空"),
+        USER_PASSWORD_IS_NOT_NULL(502,"密码不能为空"),
 
         //用户名或密码错误
-        USER_USERNAME_OR_PASSWORD_ERROR(503,"管理员用户名或密码错误"),
+        USER_USERNAME_OR_PASSWORD_ERROR(503,"用户名或密码错误"),
 
         //用户未登录
-        USER_IS_NOT_LOGIN(504,"管理员未登录"),
+        USER_IS_NOT_LOGIN(504,"用户未登录"),
 
         //登录过期
-        USER_LOGIN_TIMEOUT(505,"管理员登录过期"),
+        USER_LOGIN_TIMEOUT(505,"用户身份登录过期"),
 
         //令牌失效
-        USER_TOKEN_IS_INVALID(506,"管理员令牌失效"),
+        USER_TOKEN_IS_INVALID(506,"无效token"),
 
         //用户ID不能为空
         USER_ID_IS_NOT_NULL(507,"管理员ID不能为空"),

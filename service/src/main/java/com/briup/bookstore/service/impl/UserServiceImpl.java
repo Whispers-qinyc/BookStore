@@ -1,9 +1,9 @@
 package com.briup.bookstore.service.impl;
 
 import com.briup.bookstore.constant.BookStoreConstant;
-import com.briup.bookstore.dto.AdminAddUserDTO;
-import com.briup.bookstore.dto.AdminLoginDTO;
-import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
+import com.briup.bookstore.dto.UserLoginDTO;
+import com.briup.bookstore.dto.UserRegisterDTO;
+import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.exception.BookStoreException;
 import com.briup.bookstore.mapper.UserMapper;
 import com.briup.bookstore.po.User;
@@ -45,17 +45,17 @@ public class UserServiceImpl implements UserService{
      * @Date 22:29 2023/7/18
      **/
     @Override
-    public Result adminLogin(AdminLoginDTO adminLoginDTO) {
+    public Result adminLogin(UserLoginDTO userLoginDTO) {
         //判断用户名是否为空
-        if (!StringUtils.hasText(adminLoginDTO.getUsername())){
+        if (!StringUtils.hasText(userLoginDTO.getUsername())){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_NOT_NULL);
         }
         //判断密码是否为空
-        if (!StringUtils.hasText(adminLoginDTO.getPassword())){
+        if (!StringUtils.hasText(userLoginDTO.getPassword())){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_PASSWORD_IS_NOT_NULL);
         }
         //判断用户名密码是否正确
-        User user = userMapper.getUserByUsernameAndPassword(adminLoginDTO.getUsername(),adminLoginDTO.getPassword());
+        User user = userMapper.getUserByUsernameAndPassword(userLoginDTO.getUsername(),userLoginDTO.getPassword());
         if (Objects.isNull(user)){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_OR_PASSWORD_ERROR);
         }
@@ -123,23 +123,24 @@ public class UserServiceImpl implements UserService{
      * @version: v1.0
      * @Date 10:04 2023/7/19
      **/
+
     @Override
-    public Result addUser(AdminAddUserDTO addUserDTO) {
+    public Result addUser(UserRegisterDTO userRegisterDTO) {
         //判断用户名是否为空
-        if (!StringUtils.hasText(addUserDTO.getUsername())){
+        if (!StringUtils.hasText(userRegisterDTO.getUsername())){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_NOT_NULL);
         }
         //判断密码是否为空
-        if (!StringUtils.hasText(addUserDTO.getPassword())){
+        if (!StringUtils.hasText(userRegisterDTO.getPassword())){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_PASSWORD_IS_NOT_NULL);
         }
         //根据用户名查询用户信息条数
-        int count = userMapper.getCountByUsername(addUserDTO.getUsername());
+        int count = userMapper.getCountByUsername(userRegisterDTO.getUsername());
         if (count != 0){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_EXIST);
         }
         //执行新增用户操作
-        userMapper.insertUser(addUserDTO);
+        userMapper.insertUser(userRegisterDTO);
         //返回响应成功响应
         return Result.success();
     }
@@ -151,13 +152,13 @@ public class UserServiceImpl implements UserService{
      * @Date 11:32 2023/7/19
      **/
     @Override
-    public Result updateUserStatus(AdminUpdateUserStatusDTO updateUserStatusDTO) {
-        if (Objects.isNull(updateUserStatusDTO)){
+    public Result updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO) {
+        if (Objects.isNull(userStatusUpdateDTO)){
             //id为空
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_ID_IS_NOT_NULL);
         }
         //修改用户状态
-        userMapper.updateUserStatus(updateUserStatusDTO);
+        userMapper.updateUserStatus(userStatusUpdateDTO);
         //返回响应成功
         return Result.success();
     }

@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AdminAddUserDTO {
+public class UserRegisterDTO {
     /**
      * 登录用户名
      */

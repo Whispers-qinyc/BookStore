@@ -1,7 +1,7 @@
 package com.briup.bookstore.mapper;
 
-import com.briup.bookstore.dto.AdminAddUserDTO;
-import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
+import com.briup.bookstore.dto.UserRegisterDTO;
+import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.po.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -46,7 +46,7 @@ public interface UserMapper {
      * @version: v1.0
      * @Date 10:33 2023/7/19
      **/
-    void insertUser(AdminAddUserDTO addUserDTO);
+    void insertUser(UserRegisterDTO userRegisterDTO);
 
     /**
      * @Author qinyc
@@ -54,7 +54,7 @@ public interface UserMapper {
      * @version: v1.0
      * @Date 13:37 2023/7/19
      **/
-    void updateUserStatus(AdminUpdateUserStatusDTO updateUserStatusDTO);
+    void updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO);
 
     /**
      * @Author qinyc

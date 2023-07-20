@@ -76,7 +76,7 @@
     </select>
 
     <!--新增-->
-    <insert id="insertUser" parameterType="com.briup.bookstore.dto.AdminAddUserDTO">
+    <insert id="insertUser" parameterType="com.briup.bookstore.dto.UserRegisterDTO">
         INSERT INTO
             es_user( username, `password`, phone, avatar, gender, `status`, birthday, role_id )
         VALUES
@@ -84,7 +84,7 @@
     </insert>
 
     <!--修改用户状态-->
-    <update id="updateUserStatus" parameterType="com.briup.bookstore.dto.AdminUpdateUserStatusDTO">
+    <update id="updateUserStatus" parameterType="com.briup.bookstore.dto.UserStatusUpdateDTO">
         UPDATE es_user
         SET status = #{status}
         where id = #{id}
