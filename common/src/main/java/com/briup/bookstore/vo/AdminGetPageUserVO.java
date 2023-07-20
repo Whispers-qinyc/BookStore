@@ -1,5 +1,6 @@
 package com.briup.bookstore.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -72,7 +73,7 @@ public class AdminGetPageUserVO {
      * 注册时间
      */
     @ApiModelProperty("注册时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime registerTime;
 
     /**
@@ -80,10 +81,4 @@ public class AdminGetPageUserVO {
      */
     @ApiModelProperty("角色编号 1. 管理员 2. 普通用户")
     private Integer roleId;
-
-    /**
-     * 用户是否开通会员
-     */
-    @ApiModelProperty("用户是否开通会员")
-    private Boolean isVip;
 }
