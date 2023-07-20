@@ -1,12 +1,13 @@
 package com.briup.bookstore.service;
 
-import com.briup.bookstore.dto.AdminAddUserDTO;
-import com.briup.bookstore.dto.AdminLoginDTO;
-import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
+
 import com.briup.bookstore.dto.UserLoginDTO;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
-import com.briup.bookstore.response.Result;
+import com.briup.bookstore.vo.UserInfoVO;
+import com.briup.bookstore.vo.UserLoginVO;
+import com.briup.bookstore.vo.UserPageVO;
+import com.github.pagehelper.PageInfo;
 
 /**
 * @author qinyc
@@ -21,7 +22,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 22:31 2023/7/18
      **/
-    Result adminLogin(UserLoginDTO adminLoginDTO);
+    UserLoginVO login(UserLoginDTO adminLoginDTO, Integer roleId);
 
     /**
      * @Author qinyc
@@ -29,7 +30,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 9:22 2023/7/19
      **/
-    Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime);
+    PageInfo<UserPageVO> getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime);
 
     /**
      * @Author qinyc
@@ -37,7 +38,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 10:05 2023/7/19
      **/
-    Result addUser(UserRegisterDTO userRegisterDTO);
+    void register(UserRegisterDTO userRegisterDTO);
 
     /**
      * @Author qinyc
@@ -45,7 +46,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 11:32 2023/7/19
      **/
-    Result updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO);
+    void updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO);
 
     /**
      * @Author qinyc
@@ -53,7 +54,7 @@ public interface UserService{
      * @version: v1.0
      * @Date 14:05 2023/7/19
      **/
-    Result deleteUser(String ids);
+    void deleteUser(String ids);
 
     /**
      * @Author qinyc
@@ -61,5 +62,5 @@ public interface UserService{
      * @version: v1.0
      * @Date 15:48 2023/7/19
      **/
-    Result getUserInfo(String token) throws Exception;
+    UserInfoVO getUserInfo(String token) throws Exception;
 }

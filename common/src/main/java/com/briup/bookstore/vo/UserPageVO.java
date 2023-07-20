@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AdminGetPageUserVO {
+public class UserPageVO {
     /**
      * 主键ID
      */

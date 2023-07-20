@@ -1,20 +1,17 @@
 package com.briup.bookstore.web.controller;
 
-import com.briup.bookstore.dto.AdminAddUserDTO;
-import com.briup.bookstore.dto.AdminUpdateUserStatusDTO;
+import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.briup.bookstore.vo.UserPageVO;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
-
-import java.time.LocalDateTime;
 
 /**
  * @className: UserController
@@ -47,20 +44,13 @@ public class UserController {
     })
     @GetMapping("/getPageUser")
     public Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime,String endTime){
-        return userService.getPageUser(pageNum,pageSize,username,status,startTime,endTime);
+
+        PageInfo<UserPageVO>  userPageVOPageInfo = userService.getPageUser(pageNum, pageSize, username, status, startTime, endTime);
+        return  Result.success(userPageVOPageInfo);
+
     }
 
-    /**
-     * @Author qinyc
-     * @Description  新增用户信息
-     * @version: v1.0
-     * @Date 9:56 2023/7/19
-     **/
-    @ApiOperation("新增用户信息")
-    @PostMapping("/addUser")
-    public Result addUser(@RequestBody AdminAddUserDTO addUserDTO){
-        return userService.addUser(addUserDTO);
-    }
+
 
     /**
      * @Author qinyc
@@ -70,8 +60,9 @@ public class UserController {
      **/
     @ApiOperation("修改用户状态")
     @PutMapping("/updateUserStatus")
-    public Result updateUserStatus(@RequestBody AdminUpdateUserStatusDTO updateUserStatusDTO){
-        return userService.updateUserStatus(updateUserStatusDTO);
+    public Result updateUserStatus(@RequestBody UserStatusUpdateDTO userStatusUpdateDTO){
+        userService.updateUserStatus(userStatusUpdateDTO);
+        return  Result.success();
     }
 
     /**
@@ -83,7 +74,8 @@ public class UserController {
     @ApiOperation("删除与批量删除用户")
     @DeleteMapping("/deleteUser/{ids}")
     public Result deleteUser(@PathVariable("ids") String ids){
-        return userService.deleteUser(ids);
+         userService.deleteUser(ids);
+        return Result.success();
     }
 
 
@@ -96,6 +88,7 @@ public class UserController {
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getUserInfo")
     public Result getUserInfo(@RequestHeader("token") @ApiIgnore String token) throws Exception {
-        return userService.getUserInfo(token);
+        userService.getUserInfo(token);
+        return Result.success();
     }
 }

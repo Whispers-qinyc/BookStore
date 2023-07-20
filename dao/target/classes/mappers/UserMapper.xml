@@ -38,18 +38,30 @@
             AND password = #{password}
     </select>
 
-    <!--查询全部用户，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配-->
-    <select id="getAllUserByUsernameOrGender" resultType="com.briup.bookstore.po.User">
+    <!--查询全部用户，若存在username，根据username模糊查询，若存在status，根据status精确匹配,registerTime作为范围查询-->
+    <select id="getAllUserByUsernameOrStatus0rRegisterTime" resultType="com.briup.bookstore.po.User">
         SELECT
-            <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         FROM
-            es_user
+        es_user
         WHERE 1 = 1
         <if test="username != null and username != '' ">
             AND username LIKE concat('%',#{username},'%')
         </if>
-        <if test="gender != null and gender != '' ">
-            AND gender = #{gender}
+        <if test="status != null and status != '' ">
+            AND status = #{status}
+        </if>
+        <!--如果只存在开始时间-->
+        <if test="registerStartTime != null  and registerEndTime == null  ">
+            AND register_time >= #{registerStartTime}
+        </if>
+        <!--如果只存在结束时间-->
+        <if test="registerStartTime == null  and registerEndTime != null  ">
+            AND register_time &lt;= #{registerEndTime}
+        </if>
+        <!--如果既存在开始时间，也存在结束时间-->
+        <if test="registerStartTime != null  and registerEndTime != null  ">
+            AND register_time BETWEEN #{registerStartTime} AND #{registerEndTime}
         </if>
     </select>
 
@@ -64,7 +76,7 @@
     </select>
 
     <!--新增-->
-    <insert id="insertUser" parameterType="com.briup.bookstore.dto.AdminAddUserDTO">
+    <insert id="insertUser" parameterType="com.briup.bookstore.dto.UserRegisterDTO">
         INSERT INTO
             es_user( username, `password`, phone, avatar, gender, `status`, birthday, role_id )
         VALUES
@@ -72,7 +84,7 @@
     </insert>
 
     <!--修改用户状态-->
-    <update id="updateUserStatus" parameterType="com.briup.bookstore.dto.AdminUpdateUserStatusDTO">
+    <update id="updateUserStatus" parameterType="com.briup.bookstore.dto.UserStatusUpdateDTO">
         UPDATE es_user
         SET status = #{status}
         where id = #{id}
@@ -93,5 +105,6 @@
             es_user
         where id = #{id}
     </select>
+
 
 </mapper>

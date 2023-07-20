@@ -1,6 +1,0 @@
-com\briup\bookstore\exception\BookStoreException.class
-com\briup\bookstore\response\Result.class
-com\briup\bookstore\constant\BookStoreConstant.class
-com\briup\bookstore\exception\BookStoreException$CodeMsgEnum.class
-com\briup\bookstore\handler\GlobalExceptionHandler.class
-com\briup\bookstore\config\ALiPayConfig.class

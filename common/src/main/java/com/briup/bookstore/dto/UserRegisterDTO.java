@@ -54,21 +54,11 @@ public class UserRegisterDTO {
     private String gender;
 
     /**
-     * 用户状态(0正常，1禁用)
-     */
-    @ApiModelProperty("用户状态(0正常，1禁用)")
-    private Integer status;
-
-    /**
      * 用户生日
      */
     @ApiModelProperty("用户生日")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
-    /**
-     * 角色编号 1. 管理员 2. 普通用户
-     */
-    @ApiModelProperty("角色编号 1. 管理员 2. 普通用户")
-    private Integer roleId;
+
 }

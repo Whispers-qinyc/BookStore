@@ -7,13 +7,12 @@ import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.exception.BookStoreException;
 import com.briup.bookstore.mapper.UserMapper;
 import com.briup.bookstore.po.User;
-import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
 import com.briup.bookstore.utils.BeanCopyUtils;
 import com.briup.bookstore.utils.JsonWebTokenUtils;
-import com.briup.bookstore.vo.AdminGetPageUserVO;
-import com.briup.bookstore.vo.AdminLoginVO;
 import com.briup.bookstore.vo.UserInfoVO;
+import com.briup.bookstore.vo.UserLoginVO;
+import com.briup.bookstore.vo.UserPageVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.util.StringUtils;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService{
      * @Date 22:29 2023/7/18
      **/
     @Override
-    public Result adminLogin(UserLoginDTO userLoginDTO) {
+    public UserLoginVO login(UserLoginDTO userLoginDTO , Integer roleId)    {
         //判断用户名是否为空
         if (!StringUtils.hasText(userLoginDTO.getUsername())){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_NOT_NULL);
@@ -65,20 +63,20 @@ public class UserServiceImpl implements UserService{
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_STATUS_CLOSE);
         }
         //验证是否为管理员身份
-        if (user.getRoleId().intValue() != BookStoreConstant.LOGIN_ADMIN){
+        if (user.getRoleId().intValue() != roleId){
             //非管理员
-            throw new BookStoreException(BookStoreException.CodeMsgEnum.LOGIN_IS_NOT_ADMIN);
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.LOGIN_IDENTITY_IS_INVALID);
         }
         //登录者为管理员，根据管理员ID生成JWT
         String jwt = JsonWebTokenUtils.createJWT(user.getId().toString());
         //Bean拷贝
         UserInfoVO userInfo = BeanCopyUtils.copyBean(user, UserInfoVO.class);
         //创建VO对象
-        AdminLoginVO adminLoginVO = new AdminLoginVO();
+        UserLoginVO userLoginVO = new UserLoginVO();
         //封装jwt、用户信息在VO对象中
-        adminLoginVO.setJwt(jwt).setUserInfo(userInfo);
+        userLoginVO.setJwt(jwt).setUserInfo(userInfo);
         //返回统一响应
-        return Result.success(adminLoginVO);
+        return userLoginVO;
     }
 
     /**
@@ -88,7 +86,7 @@ public class UserServiceImpl implements UserService{
      * @Date 9:21 2023/7/19
      **/
     @Override
-    public Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime) {
+    public PageInfo<UserPageVO> getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime) {
         //初始化开始时间
         LocalDateTime registerStartTime = null;
         //初始化结束时间
@@ -110,11 +108,11 @@ public class UserServiceImpl implements UserService{
         //核心查询
         List<User> users = userMapper.getAllUserByUsernameOrStatus0rRegisterTime(username, status,registerStartTime,registerEndTime);
         //Bean拷贝
-        List<AdminGetPageUserVO> adminGetPageUserVOS = BeanCopyUtils.copyBeanList(users, AdminGetPageUserVO.class);
+        List<UserPageVO> userPageVOS = BeanCopyUtils.copyBeanList(users, UserPageVO.class);
         //封装在PageInfo对象中
-        PageInfo<AdminGetPageUserVO> adminGetPageUserVOPageInfo = new PageInfo<>(adminGetPageUserVOS);
+        PageInfo<UserPageVO> userPageVOPageInfo = new PageInfo<>(userPageVOS);
         //返回统一响应结果
-        return Result.success(adminGetPageUserVOPageInfo);
+        return userPageVOPageInfo;
     }
 
     /**
@@ -125,7 +123,7 @@ public class UserServiceImpl implements UserService{
      **/
 
     @Override
-    public Result addUser(UserRegisterDTO userRegisterDTO) {
+    public void register(UserRegisterDTO userRegisterDTO) {
         //判断用户名是否为空
         if (!StringUtils.hasText(userRegisterDTO.getUsername())){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_NOT_NULL);
@@ -142,7 +140,6 @@ public class UserServiceImpl implements UserService{
         //执行新增用户操作
         userMapper.insertUser(userRegisterDTO);
         //返回响应成功响应
-        return Result.success();
     }
 
     /**
@@ -152,7 +149,7 @@ public class UserServiceImpl implements UserService{
      * @Date 11:32 2023/7/19
      **/
     @Override
-    public Result updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO) {
+    public void updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO) {
         if (Objects.isNull(userStatusUpdateDTO)){
             //id为空
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_ID_IS_NOT_NULL);
@@ -160,7 +157,6 @@ public class UserServiceImpl implements UserService{
         //修改用户状态
         userMapper.updateUserStatus(userStatusUpdateDTO);
         //返回响应成功
-        return Result.success();
     }
 
     /**
@@ -170,7 +166,7 @@ public class UserServiceImpl implements UserService{
      * @Date 14:04 2023/7/19
      **/
     @Override
-    public Result deleteUser(String ids) {
+    public void deleteUser(String ids) {
         //判断ids是否为空
         if (!StringUtils.hasText(ids)){
             throw new BookStoreException(BookStoreException.CodeMsgEnum.TO_BE_DELETE_USER_IDS_IS_NOT_NULL);
@@ -182,8 +178,7 @@ public class UserServiceImpl implements UserService{
             //遇到异常可能是因为待删除用户有关联的购物车、订单、收货地址信息未被删除
             throw new BookStoreException(BookStoreException.CodeMsgEnum.DELETE_USER_FAIL);
         }
-        //返回统一响应
-        return Result.success();
+
     }
 
     /**
@@ -193,15 +188,15 @@ public class UserServiceImpl implements UserService{
      * @Date 15:48 2023/7/19
      **/
     @Override
-    public Result getUserInfo(String token) throws Exception {
+    public UserInfoVO getUserInfo(String token) throws Exception {
         //从token中解析用户id
         String id = (String) JsonWebTokenUtils.parseJWT(token).get("sub");
         //根据用户ID查询用户信息
         User user = userMapper.getUserById(Integer.parseInt(id));
         //bean拷贝
         UserInfoVO userInfoVO = BeanCopyUtils.copyBean(user, UserInfoVO.class);
-        //返回统一响应结果
-        return Result.success(userInfoVO);
+
+        return userInfoVO;
     }
 }
 

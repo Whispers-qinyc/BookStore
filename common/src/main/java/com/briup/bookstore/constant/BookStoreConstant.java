@@ -50,10 +50,7 @@ public class BookStoreConstant {
      */
     public static final int LOGIN_STATUS_CLOSE = 1;
 
-    /*
-     * 登录用户为管理员
-     */
-    public static final Integer LOGIN_ADMIN = 1;
+
 
 
 }

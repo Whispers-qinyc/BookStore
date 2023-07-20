@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class AdminLoginVO {
+public class UserLoginVO {
     /**
      * 令牌
      **/

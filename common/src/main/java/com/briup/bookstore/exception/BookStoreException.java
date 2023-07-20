@@ -80,8 +80,8 @@ public class BookStoreException extends  RuntimeException {
         FILE_TYPE_ERROR(511,"图片类型错误，只能是 .jpg 或 .png格式 "),
 
 
-        //登录账号非管理员账号
-        LOGIN_IS_NOT_ADMIN(512,"登录账号非管理员账号"),
+        //登录账号与登录系统不符
+        LOGIN_IDENTITY_IS_INVALID(512,"账号权限不足，请联系管理员"),
 
         //删除用户失败，待删除用户存在购物车信息、订单信息、收货地址信息，请检查删除完毕后重试
         DELETE_USER_FAIL(513,"删除用户失败，待删除用户存在购物车信息、订单信息、收货地址信息，请检查删除完毕后重试"),

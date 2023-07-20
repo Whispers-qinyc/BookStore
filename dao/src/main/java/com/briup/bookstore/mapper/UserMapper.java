@@ -3,7 +3,9 @@ package com.briup.bookstore.mapper;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.po.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 * @createDate 2023-07-18 21:21:11
 * @Entity com.briup.bookstore.po.User
 */
+@Repository
 public interface UserMapper {
 
     /**
