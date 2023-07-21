@@ -31,9 +31,16 @@ public class UserController {
 
     /**
      * @Author qinyc
-     * @Description  分页多条件查询用户信息，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配
-     * @version: v1.0
-     * @Date 9:14 2023/7/19
+     * @Description 分页多条件查询用户信息，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配
+     * @Version: v1.0
+     * @Date 10:21 2023/7/21
+     * @Param :pageNum
+     * @Param :pageSize
+     * @Param :username
+     * @Param :status
+     * @Param :startTime
+     * @Param :endTime
+     * @Return: com.briup.bookstore.response.Result
      **/
     @ApiOperation("分页多条件查询用户信息")
     @ApiImplicitParams({
@@ -45,8 +52,8 @@ public class UserController {
             @ApiImplicitParam(name = "endTime",value = "结束时间"),
     })
     @GetMapping("/getPageUser")
-    public Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime,String endTime){
-        PageInfo<UserPageVO>  userPageVOPageInfo = userService.getPageUser(pageNum, pageSize, username, status, startTime, endTime);
+    public Result getUserPage(Integer pageNum, Integer pageSize, String username, String status, String startTime,String endTime){
+        PageInfo<UserPageVO>  userPageVOPageInfo = userService.getUserPage(pageNum, pageSize, username, status, startTime, endTime);
         return  Result.success(userPageVOPageInfo);
     }
 
@@ -54,9 +61,11 @@ public class UserController {
 
     /**
      * @Author qinyc
-     * @Description  修改用户状态
-     * @version: v1.0
-     * @Date 11:24 2023/7/19
+     * @Description 修改用户状态
+     * @Version: v1.0
+     * @Date 10:23 2023/7/21
+     * @Param :userStatusUpdateDTO
+     * @Return: com.briup.bookstore.response.Result
      **/
     @ApiOperation("修改用户状态")
     @PutMapping("/updateUserStatus")
@@ -67,9 +76,11 @@ public class UserController {
 
     /**
      * @Author qinyc
-     * @Description  删除与批量删除用户
-     * @version: v1.0
-     * @Date 13:43 2023/7/19
+     * @Description 删除与批量删除用户
+     * @Version: v1.0
+     * @Date 10:23 2023/7/21
+     * @Param :ids
+     * @Return: com.briup.bookstore.response.Result
      **/
     @ApiOperation("删除与批量删除用户")
     @DeleteMapping("/deleteUser/{ids}")
@@ -81,9 +92,11 @@ public class UserController {
 
     /**
      * @Author qinyc
-     * @Description  获取用户个人信息
-     * @version: v1.0
-     * @Date 15:31 2023/7/19
+     * @Description 获取用户个人信息
+     * @Version: v1.0
+     * @Date 10:23 2023/7/21
+     * @Param :token
+     * @Return: com.briup.bookstore.response.Result
      **/
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getUserInfo")

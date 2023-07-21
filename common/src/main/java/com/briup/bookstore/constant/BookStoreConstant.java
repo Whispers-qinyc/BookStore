@@ -50,6 +50,17 @@ public class BookStoreConstant {
      */
     public static final int LOGIN_STATUS_CLOSE = 1;
 
+    /*
+     * 前台登录角色ID
+     */
+    public static final Integer LOGIN_ADMIN = 1;
+
+
+    /*
+     * 前台登录角色ID
+     */
+    public static final Integer LOGIN_USER = 2;
+
 
 
 

@@ -38,9 +38,12 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  登录
-     * @version: v1.0
-     * @Date 22:29 2023/7/18
+     * @Description 登录
+     * @Version: v1.0
+     * @Date 10:21 2023/7/21
+     * @Param :userLoginDTO
+     * @Param :roleId
+     * @Return: com.briup.bookstore.vo.UserLoginVO
      **/
     @Override
     public UserLoginVO login(UserLoginDTO userLoginDTO , Integer roleId)    {
@@ -81,12 +84,19 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  分页多条件查询用户信息
-     * @version: v1.0
-     * @Date 9:21 2023/7/19
+     * @Description 分页多条件查询用户信息，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配
+     * @Version: v1.0
+     * @Date 10:22 2023/7/21
+     * @Param :pageNum
+     * @Param :pageSize
+     * @Param :username
+     * @Param :status
+     * @Param :startTime
+     * @Param :endTime
+     * @Return: com.github.pagehelper.PageInfo<com.briup.bookstore.vo.UserPageVO>
      **/
     @Override
-    public PageInfo<UserPageVO> getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime) {
+    public PageInfo<UserPageVO> getUserPage(Integer pageNum, Integer pageSize, String username, String status, String startTime, String endTime) {
         //初始化开始时间
         LocalDateTime registerStartTime = null;
         //初始化结束时间
@@ -117,9 +127,11 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  新增用户信息
-     * @version: v1.0
-     * @Date 10:04 2023/7/19
+     * @Description 新增用户信息
+     * @Version: v1.0
+     * @Date 10:25 2023/7/21
+     * @Param :userRegisterDTO
+     * @Return: void
      **/
 
     @Override
@@ -144,9 +156,11 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  修改用户状态
-     * @version: v1.0
-     * @Date 11:32 2023/7/19
+     * @Description 修改用户状态
+     * @Version: v1.0
+     * @Date 10:25 2023/7/21
+     * @Param :userStatusUpdateDTO
+     * @Return: void
      **/
     @Override
     public void updateUserStatus(UserStatusUpdateDTO userStatusUpdateDTO) {
@@ -161,9 +175,11 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  删除与批量删除用户
-     * @version: v1.0
-     * @Date 14:04 2023/7/19
+     * @Description 删除与批量删除用户
+     * @Version: v1.0
+     * @Date 10:25 2023/7/21
+     * @Param :ids
+     * @Return: void
      **/
     @Override
     public void deleteUser(String ids) {
@@ -183,9 +199,11 @@ public class UserServiceImpl implements UserService{
 
     /**
      * @Author qinyc
-     * @Description  获取用户个人信息
-     * @version: v1.0
-     * @Date 15:48 2023/7/19
+     * @Description 获取用户个人信息
+     * @Version: v1.0
+     * @Date 10:25 2023/7/21
+     * @Param :token
+     * @Return: com.briup.bookstore.vo.UserInfoVO
      **/
     @Override
     public UserInfoVO getUserInfo(String token) throws Exception {
@@ -195,7 +213,6 @@ public class UserServiceImpl implements UserService{
         User user = userMapper.getUserById(Integer.parseInt(id));
         //bean拷贝
         UserInfoVO userInfoVO = BeanCopyUtils.copyBean(user, UserInfoVO.class);
-
         return userInfoVO;
     }
 }

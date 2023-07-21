@@ -1,5 +1,6 @@
 package com.briup.bookstore.web.controller;
 
+import com.briup.bookstore.constant.BookStoreConstant;
 import com.briup.bookstore.dto.UserLoginDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
@@ -30,14 +31,17 @@ public class LoginController {
 
     /**
      * @Author qinyc
-     * @Description  登录
-     * @version: v1.0
-     * @Date 22:22 2023/7/18
+     * @Description 登录
+     * @Version: v1.0
+     * @Date 10:21 2023/7/21
+     * @Param :userLoginDTO
+     * @Param :roleId
+     * @Return: com.briup.bookstore.response.Result
      **/
     @ApiOperation("登录")
     @PostMapping("/login")
-    public Result adminLogin(@RequestBody UserLoginDTO userLoginDTO, Integer roleId){
-        UserLoginVO login = userService.login(userLoginDTO, roleId);
+    public Result adminLogin(@RequestBody UserLoginDTO userLoginDTO){
+        UserLoginVO login = userService.login(userLoginDTO, BookStoreConstant.LOGIN_ADMIN);
         return Result.success(login);
     }
 

@@ -15,4 +15,16 @@
         id,name,description,
         parent_id
     </sql>
+
+    <!--查询所有分类信息，如果存在分类名称，根据分类名称模糊匹配全部数据-->
+    <select id="selectAllCategoryByName" resultType="com.briup.bookstore.po.Category">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM es_category
+        <where>
+            <if test="name != null and name != '' ">
+                AND name LIKE concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
 </mapper>
