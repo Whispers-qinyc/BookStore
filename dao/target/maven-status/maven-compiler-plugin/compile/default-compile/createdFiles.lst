@@ -1,0 +1,8 @@
+com\briup\bookstore\mapper\UserMapper.class
+com\briup\bookstore\mapper\OrderMapper.class
+com\briup\bookstore\mapper\ShopcarMapper.class
+com\briup\bookstore\mapper\CategoryMapper.class
+com\briup\bookstore\mapper\OrderItemMapper.class
+com\briup\bookstore\config\MybatisConfig.class
+com\briup\bookstore\mapper\BookMapper.class
+com\briup\bookstore\mapper\AddressMapper.class

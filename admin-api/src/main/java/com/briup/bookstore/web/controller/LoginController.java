@@ -1,8 +1,9 @@
 package com.briup.bookstore.web.controller;
 
-import com.briup.bookstore.dto.AdminLoginDTO;
+import com.briup.bookstore.dto.UserLoginDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
+import com.briup.bookstore.vo.UserLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "登录相关模块")
 @RestController
 @RequestMapping("/admin")
-public class AdminLoginController {
+public class LoginController {
 
     @Autowired
     private UserService userService;
@@ -35,8 +36,9 @@ public class AdminLoginController {
      **/
     @ApiOperation("登录")
     @PostMapping("/login")
-    public Result adminLogin(@RequestBody AdminLoginDTO adminLoginDTO){
-        return userService.adminLogin(adminLoginDTO);
+    public Result adminLogin(@RequestBody UserLoginDTO userLoginDTO, Integer roleId){
+        UserLoginVO login = userService.login(userLoginDTO, roleId);
+        return Result.success(login);
     }
 
 }

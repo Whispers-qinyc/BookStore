@@ -35,6 +35,7 @@ public class UploadController {
     @ApiOperation("图片上传接口")
     @PostMapping("/upload")
     public Result upload(@RequestPart MultipartFile img){
-        return uploadService.upload(img);
+        String url = uploadService.upload(img);
+        return Result.success(url);
     }
 }

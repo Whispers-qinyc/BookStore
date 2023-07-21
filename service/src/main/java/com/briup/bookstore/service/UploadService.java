@@ -19,5 +19,5 @@ public interface UploadService {
      * @version: v1.0
      * @Date 22:09 2023/7/18
      **/
-    Result upload(MultipartFile img);
+    String upload(MultipartFile img);
 }

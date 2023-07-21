@@ -40,14 +40,14 @@ public class UserController {
             @ApiImplicitParam(name = "pageNum",value = "当前页码",required = true),
             @ApiImplicitParam(name = "pageSize",value = "每页大小",required = true),
             @ApiImplicitParam(name = "username",value = "用户名"),
-            @ApiImplicitParam(name = "gender",value = "性别"),
+            @ApiImplicitParam(name = "status",value = "用户状态"),
+            @ApiImplicitParam(name = "startTime",value = "开始时间"),
+            @ApiImplicitParam(name = "endTime",value = "结束时间"),
     })
     @GetMapping("/getPageUser")
     public Result getPageUser(Integer pageNum, Integer pageSize, String username, String status, String startTime,String endTime){
-
         PageInfo<UserPageVO>  userPageVOPageInfo = userService.getPageUser(pageNum, pageSize, username, status, startTime, endTime);
         return  Result.success(userPageVOPageInfo);
-
     }
 
 
@@ -74,7 +74,7 @@ public class UserController {
     @ApiOperation("删除与批量删除用户")
     @DeleteMapping("/deleteUser/{ids}")
     public Result deleteUser(@PathVariable("ids") String ids){
-         userService.deleteUser(ids);
+        userService.deleteUser(ids);
         return Result.success();
     }
 

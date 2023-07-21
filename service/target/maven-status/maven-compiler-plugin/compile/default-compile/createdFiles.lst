@@ -1,0 +1,16 @@
+com\briup\bookstore\service\impl\CategoryServiceImpl.class
+com\briup\bookstore\service\OrderService.class
+com\briup\bookstore\service\impl\ShopcarServiceImpl.class
+com\briup\bookstore\service\impl\BookServiceImpl.class
+com\briup\bookstore\service\impl\UserServiceImpl.class
+com\briup\bookstore\service\impl\OrderItemServiceImpl.class
+com\briup\bookstore\service\UserService.class
+com\briup\bookstore\service\OrderItemService.class
+com\briup\bookstore\service\CategoryService.class
+com\briup\bookstore\service\impl\AddressServiceImpl.class
+com\briup\bookstore\service\UploadService.class
+com\briup\bookstore\service\BookService.class
+com\briup\bookstore\service\AddressService.class
+com\briup\bookstore\service\impl\UploadServiceImpl.class
+com\briup\bookstore\service\ShopcarService.class
+com\briup\bookstore\service\impl\OrderServiceImpl.class

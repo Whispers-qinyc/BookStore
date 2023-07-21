@@ -31,7 +31,7 @@ public class UploadServiceImpl implements UploadService {
      * @Date 22:09 2023/7/18
      **/
     @Override
-    public Result upload(MultipartFile img) {
+    public String upload(MultipartFile img) {
         //判断文件类型
         //获取原始文件名
         String originalFilename = img.getOriginalFilename();
@@ -46,6 +46,6 @@ public class UploadServiceImpl implements UploadService {
         //上传文件
         String url = uploadOSSUtils.uploadOss(img, filePath);
         //返回上传成功响应
-        return Result.success(url);
+        return url;
     }
 }

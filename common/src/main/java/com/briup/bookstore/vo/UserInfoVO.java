@@ -1,5 +1,6 @@
 package com.briup.bookstore.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -72,7 +73,7 @@ public class UserInfoVO {
      * 注册时间
      */
     @ApiModelProperty("注册时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private LocalDateTime registerTime;
 
     /**
@@ -90,7 +91,7 @@ public class UserInfoVO {
     /**
      * 用户会员到期时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @ApiModelProperty("用户会员到期时间")
     private LocalDateTime vipExpirationTime;
 }
