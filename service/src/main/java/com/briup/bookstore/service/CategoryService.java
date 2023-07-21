@@ -1,5 +1,6 @@
 package com.briup.bookstore.service;
 
+import com.briup.bookstore.po.Category;
 import com.briup.bookstore.vo.CategoryInfoVO;
 import com.github.pagehelper.PageInfo;
 
@@ -34,4 +35,14 @@ public interface CategoryService {
      * @Return: java.util.List<com.briup.bookstore.vo.CategoryInfoVO>
      **/
     List<CategoryInfoVO> getAllCategory();
+
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取分类信息
+     * @Version: v1.0
+     * @Date 15:36 2023/7/21
+     * @Param :id
+     * @Return: com.briup.bookstore.po.Category
+     **/
+    Category getCategoryById(Integer id);
 }

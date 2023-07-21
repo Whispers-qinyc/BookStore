@@ -1,5 +1,6 @@
 package com.briup.bookstore.web.controller;
 
+import com.briup.bookstore.po.Category;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.CategoryService;
 import com.briup.bookstore.vo.CategoryInfoVO;
@@ -8,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,5 +59,20 @@ public class CategoryController {
     public Result getAllCategory(){
         List<CategoryInfoVO> categoryPageVOS =  categoryService.getAllCategory();
         return Result.success(categoryPageVOS);
+    }
+
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取分类信息
+     * @Version: v1.0
+     * @Date 15:31 2023/7/21
+     * @Param :id
+     * @Return: com.briup.bookstore.response.Result
+     **/
+    @ApiOperation("根据分类ID获取分类信息")
+    @GetMapping("/getCategoryById/{id}")
+    public Result getCategoryById(@PathVariable("id") Integer id){
+        Category category = categoryService.getCategoryById(id);
+        return Result.success(category);
     }
 }

@@ -69,6 +69,22 @@ public class CategoryServiceImpl implements CategoryService{
         //返回封装好的是树状数据
         return categoryInfoVOS;
     }
+
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取分类信息
+     * @Version: v1.0
+     * @Date 15:36 2023/7/21
+     * @Param :id
+     * @Return: com.briup.bookstore.po.Category
+     **/
+    @Override
+    public Category getCategoryById(Integer id) {
+        //根据分类ID获取分类信息
+        Category category = categoryMapper.selectCategoryById(id);
+        //返回查询到的分类对象
+        return category;
+    }
 }
 
 
