@@ -1,6 +1,6 @@
 package com.briup.bookstore.utils;
 
-import com.briup.bookstore.vo.CategoryPageVO;
+import com.briup.bookstore.po.TreeNode;
 import com.google.common.collect.Lists;
 import io.jsonwebtoken.lang.Collections;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class TreeDataUtils {
      * @Param :nodes 扁平化数据原型
      * @Return: java.util.List<T> 处理好的树形数据
      **/
-    public static <T extends CategoryPageVO> List<T> convert(List<T> nodes) {
+    public static <T extends TreeNode> List<T> convert(List<T> nodes) {
 
         //判断传进来的集合是否为空
         if (Collections.isEmpty(nodes)) {

@@ -3,6 +3,7 @@ package com.briup.bookstore.web.controller;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
+import com.briup.bookstore.vo.UserInfoVO;
 import com.briup.bookstore.vo.UserPageVO;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
@@ -101,7 +102,7 @@ public class UserController {
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getUserInfo")
     public Result getUserInfo(@RequestHeader("token") @ApiIgnore String token) throws Exception {
-        userService.getUserInfo(token);
-        return Result.success();
+        UserInfoVO userInfo = userService.getUserInfo(token);
+        return Result.success(userInfo);
     }
 }

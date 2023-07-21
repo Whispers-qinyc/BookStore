@@ -1,5 +1,6 @@
 package com.briup.bookstore.vo;
 
+import com.alipay.api.domain.CategoryVO;
 import com.briup.bookstore.po.TreeNode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class CategoryPageVO extends TreeNode {
+public class CategoryInfoVO extends TreeNode {
     /**
      * 书籍分类名字
      */
@@ -35,10 +36,4 @@ public class CategoryPageVO extends TreeNode {
      */
     @ApiModelProperty("书籍分类描述")
     private String description;
-
-    /**
-     * 子分类信息
-     */
-    @ApiModelProperty("子分类信息")
-    private List<CategoryPageVO> children = new ArrayList<>();
 }

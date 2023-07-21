@@ -23,6 +23,16 @@ public interface CategoryMapper {
      * @Return: java.util.List<com.briup.bookstore.po.Category>
      **/
     List<Category> selectAllCategoryByName(String name);
+
+    /**
+     * @Author qinyc
+     * @Description 查询全部分类信息
+     * @Version: v1.0
+     * @Date 15:17 2023/7/21
+     * @Param :
+     * @Return: java.util.List<com.briup.bookstore.po.Category>
+     **/
+    List<Category> selectAllCategory();
 }
 
 

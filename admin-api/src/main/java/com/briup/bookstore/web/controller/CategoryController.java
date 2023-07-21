@@ -2,6 +2,7 @@ package com.briup.bookstore.web.controller;
 
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.CategoryService;
+import com.briup.bookstore.vo.CategoryInfoVO;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @className: CategoryController
@@ -39,5 +42,20 @@ public class CategoryController {
     public Result getCategoryPage(Integer pageNum,Integer pageSize,String name){
         PageInfo categoryPageInfo = categoryService.getCategoryPage(pageNum,pageSize,name);
         return Result.success(categoryPageInfo);
+    }
+
+    /**
+     * @Author qinyc
+     * @Description 查询全部分类
+     * @Version: v1.0
+     * @Date 14:54 2023/7/21
+     * @Param : null
+     * @Return: com.briup.bookstore.response.Result
+     **/
+    @ApiOperation("查询全部分类")
+    @GetMapping("/getAllCategory")
+    public Result getAllCategory(){
+        List<CategoryInfoVO> categoryPageVOS =  categoryService.getAllCategory();
+        return Result.success(categoryPageVOS);
     }
 }

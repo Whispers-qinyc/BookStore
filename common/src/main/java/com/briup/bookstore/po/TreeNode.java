@@ -1,6 +1,5 @@
 package com.briup.bookstore.po;
 
-import com.briup.bookstore.vo.CategoryPageVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +24,20 @@ import java.util.List;
 @Accessors(chain = true)
 public class TreeNode {
     /**
-     * 书籍分类id
+     * id
      */
-    @ApiModelProperty("书籍分类id")
+    @ApiModelProperty("id")
     public Integer id;
 
     /**
-     * 父分类ID
+     * 父ID
      */
-    @ApiModelProperty("父分类ID")
+    @ApiModelProperty("父ID")
     public Integer parentId;
+
+    /**
+     * 子信息
+     */
+    @ApiModelProperty("子信息")
+    private List children = new ArrayList<>();
 }

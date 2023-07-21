@@ -5,7 +5,7 @@ import com.briup.bookstore.po.Category;
 import com.briup.bookstore.service.CategoryService;
 import com.briup.bookstore.utils.BeanCopyUtils;
 import com.briup.bookstore.utils.TreeDataUtils;
-import com.briup.bookstore.vo.CategoryPageVO;
+import com.briup.bookstore.vo.CategoryInfoVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +37,37 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public PageInfo getCategoryPage(Integer pageNum, Integer pageSize, String name) {
         //开启PageHelper分页插件
-        PageHelper.startPage(pageNum,pageSize,true);
+        PageHelper.startPage(pageNum,pageSize);
         //核心查询
         List<Category> categories =  categoryMapper.selectAllCategoryByName(name);
-        List<CategoryPageVO> categoryPageVOS = BeanCopyUtils.copyBeanList(categories, CategoryPageVO.class);
-        List<CategoryPageVO> convert = TreeDataUtils.convert(categoryPageVOS);
+        //Bean拷贝
+        List<CategoryInfoVO> categoryInfoVOS = BeanCopyUtils.copyBeanList(categories, CategoryInfoVO.class);
+        //扁平化数据转换树状数据
+        categoryInfoVOS = TreeDataUtils.convert(categoryInfoVOS);
         //将查询出来的分类集合封装在CategoryPageVO对象中
-        PageInfo<CategoryPageVO> categoryPageVOPageInfo = new PageInfo<>(convert);
-        return categoryPageVOPageInfo;
+        PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
+        //返回PageInfo对象
+        return categoryInfoVOPageInfo;
+    }
+
+    /**
+     * @Author qinyc
+     * @Description 查询全部分类
+     * @Version: v1.0
+     * @Date 15:17 2023/7/21
+     * @Param :
+     * @Return: java.util.List<com.briup.bookstore.vo.CategoryInfoVO>
+     **/
+    @Override
+    public List<CategoryInfoVO> getAllCategory() {
+        //查询全部分类信息
+        List<Category> categories = categoryMapper.selectAllCategory();
+        //Bean拷贝
+        List<CategoryInfoVO> categoryInfoVOS = BeanCopyUtils.copyBeanList(categories, CategoryInfoVO.class);
+        //扁平化数据转换树状数据
+        categoryInfoVOS = TreeDataUtils.convert(categoryInfoVOS);
+        //返回封装好的是树状数据
+        return categoryInfoVOS;
     }
 }
 
