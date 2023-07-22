@@ -67,4 +67,14 @@ public interface CategoryService {
      * @Return: void
      **/
     void updateCategory(CategoryUpdateDTO categoryUpdateDTO);
+
+    /**
+     * @Author qinyc
+     * @Description 删除分类信息(删除+批量删除)
+     * @Version: v1.0
+     * @Date 4:35 2023/7/23
+     * @Param :ids
+     * @Return: void
+     **/
+    void deleteCategory(String ids);
 }

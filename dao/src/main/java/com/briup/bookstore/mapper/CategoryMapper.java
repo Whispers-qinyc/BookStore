@@ -64,6 +64,16 @@ public interface CategoryMapper {
      * @Return: void
      **/
     void updateCategoryById(Category category);
+
+    /**
+     * @Author qinyc
+     * @Description 批量删除
+     * @Version: v1.0
+     * @Date 4:39 2023/7/23
+     * @Param :ids
+     * @Return: void
+     **/
+    void deleteBatchIds(String ids);
 }
 
 

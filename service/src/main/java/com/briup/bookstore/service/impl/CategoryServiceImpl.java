@@ -13,6 +13,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -148,6 +149,29 @@ public class CategoryServiceImpl implements CategoryService{
         Category category = BeanCopyUtils.copyBean(categoryUpdateDTO, Category.class);
         //根据分类ID更新分类信息
         categoryMapper.updateCategoryById(category);
+    }
+
+    /**
+     * @Author qinyc
+     * @Description 删除分类信息(删除+批量删除)
+     * @Version: v1.0
+     * @Date 4:36 2023/7/23
+     * @Param :ids
+     * @Return: void
+     **/
+    @Override
+    public void deleteCategory(String ids) {
+        //判断ids是否为空
+        if (!StringUtils.hasText(ids)){
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.TO_BE_DELETE_CATEGORY_IDS_IS_NOT_NULL);
+        }
+        //批量删除
+        try {
+            categoryMapper.deleteBatchIds(ids);
+        }catch (Exception e){
+            //遇到异常可能是因为待删除分类有关联的图书信息、父分类下有子分类未被删除
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.DELETE_CATEGORY_FAIL);
+        }
     }
 }
 

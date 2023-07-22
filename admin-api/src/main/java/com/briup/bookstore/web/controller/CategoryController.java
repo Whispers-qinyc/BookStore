@@ -105,4 +105,19 @@ public class CategoryController {
         categoryService.updateCategory(categoryUpdateDTO);
         return Result.success();
     }
+
+    /**
+     * @Author qinyc
+     * @Description 删除分类信息(删除+批量删除)
+     * @Version: v1.0
+     * @Date 4:34 2023/7/23
+     * @Param :ids
+     * @Return: com.briup.bookstore.response.Result
+     **/
+    @ApiOperation("删除分类信息")
+    @DeleteMapping("/deleteCategory/{ids}")
+    public Result deleteCategory(@PathVariable("ids") String ids){
+        categoryService.deleteCategory(ids);
+        return Result.success();
+    }
 }

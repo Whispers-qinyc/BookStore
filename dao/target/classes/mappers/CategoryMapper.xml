@@ -74,4 +74,11 @@
         SET name = #{name},description = #{description},parent_id = #{parentId}
         WHERE id = #{id}
     </update>
+
+    <!--批量删除分类信息-->
+    <delete id="deleteBatchIds">
+        DELETE FROM
+            es_category
+        WHERE id IN (${ids})
+    </delete>
 </mapper>

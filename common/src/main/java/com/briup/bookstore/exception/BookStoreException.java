@@ -94,6 +94,12 @@ public class BookStoreException extends  RuntimeException {
 
         //指定的分类信息不存在
         CATEGORY_IS_NOT_EXIST(602,"指定的分类信息不存在"),
+
+        //待删除分类ID集合不能为空
+        TO_BE_DELETE_CATEGORY_IDS_IS_NOT_NULL(603,"待删除分类ID集合不能为空"),
+
+        //删除分类信息失败，待删除分类有关联的图书信息、父分类下有子分类未被删除，请检查删除完毕后重试
+        DELETE_CATEGORY_FAIL(604,"删除分类信息失败，待删除分类有关联的图书信息、父分类下有子分类未被删除，请检查删除完毕后重试"),
         ;
 
 
