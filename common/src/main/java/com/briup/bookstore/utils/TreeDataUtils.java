@@ -50,7 +50,7 @@ public class TreeDataUtils {
                 nodeTree.add(t);
             } else {
                 //存放子级节点，不存在则通过节点类型先实例化后放入，而后将当前遍历对象直接添加至子级节点
-                if (!nodeMap.containsKey(t.getParentId())) {  // (6)
+                if (!nodeMap.containsKey(t.getParentId())) {
                     T instance = null;
                     try {
                         instance = clazz.newInstance();

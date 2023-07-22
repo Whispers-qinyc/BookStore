@@ -1,5 +1,6 @@
 package com.briup.bookstore.service;
 
+import com.briup.bookstore.dto.CategoryAddDTO;
 import com.briup.bookstore.po.Category;
 import com.briup.bookstore.vo.CategoryInfoVO;
 import com.github.pagehelper.PageInfo;
@@ -45,4 +46,14 @@ public interface CategoryService {
      * @Return: com.briup.bookstore.po.Category
      **/
     Category getCategoryById(Integer id);
+
+    /**
+     * @Author qinyc
+     * @Description 新增分类
+     * @Version: v1.0
+     * @Date 3:51 2023/7/23
+     * @Param :categoryAddDTO
+     * @Return: void
+     **/
+    void addCategory(CategoryAddDTO categoryAddDTO);
 }

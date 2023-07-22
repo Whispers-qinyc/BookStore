@@ -1,5 +1,6 @@
 package com.briup.bookstore.service.impl;
 
+import com.briup.bookstore.dto.CategoryAddDTO;
 import com.briup.bookstore.mapper.CategoryMapper;
 import com.briup.bookstore.po.Category;
 import com.briup.bookstore.service.CategoryService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
 * @author qinyc
@@ -26,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     /**
      * @Author qinyc
-     * @Description 分页多条件查询分类信息
+     * @Description 分页多条件查询分类信息(一对多实现)
      * @Version: v1.0
      * @Date 10:27 2023/7/21
      * @Param :pageNum
@@ -38,21 +40,24 @@ public class CategoryServiceImpl implements CategoryService{
     public PageInfo getCategoryPage(Integer pageNum, Integer pageSize, String name) {
         //开启PageHelper分页插件
         PageHelper.startPage(pageNum,pageSize);
-        //核心查询
-        List<Category> categories =  categoryMapper.selectAllCategoryByName(name);
-        //Bean拷贝
-        List<CategoryInfoVO> categoryInfoVOS = BeanCopyUtils.copyBeanList(categories, CategoryInfoVO.class);
-        //扁平化数据转换树状数据
-        categoryInfoVOS = TreeDataUtils.convert(categoryInfoVOS);
-        //将查询出来的分类集合封装在CategoryPageVO对象中
+//        //核心查询
+//        List<Category> categories =  categoryMapper.selectAllCategoryByName(name);
+//        //Bean拷贝
+//        List<CategoryInfoVO> categoryInfoVOS = BeanCopyUtils.copyBeanList(categories, CategoryInfoVO.class);
+//        //扁平化数据转换树状数据
+//        categoryInfoVOS = TreeDataUtils.convert(categoryInfoVOS);
+//        //将查询出来的分类集合封装在CategoryPageVO对象中
+//        PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
+//        //返回PageInfo对象
+//        return categoryInfoVOPageInfo;
+        List<CategoryInfoVO> categoryInfoVOS =  categoryMapper.selectAllCategoryByName(name);
         PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
-        //返回PageInfo对象
         return categoryInfoVOPageInfo;
     }
 
     /**
      * @Author qinyc
-     * @Description 查询全部分类
+     * @Description 查询全部分类（扁平化数据转树状数据）
      * @Version: v1.0
      * @Date 15:17 2023/7/21
      * @Param :
@@ -84,6 +89,22 @@ public class CategoryServiceImpl implements CategoryService{
         Category category = categoryMapper.selectCategoryById(id);
         //返回查询到的分类对象
         return category;
+    }
+
+    /**
+     * @Author qinyc
+     * @Description 新增分类
+     * @Version: v1.0
+     * @Date 3:52 2023/7/23
+     * @Param :categoryAddDTO
+     * @Return: void
+     **/
+    @Override
+    public void addCategory(CategoryAddDTO categoryAddDTO) {
+        //Bean拷贝
+        Category category = BeanCopyUtils.copyBean(categoryAddDTO, Category.class);
+        //新增分类
+        categoryMapper.insertCategory(category);
     }
 }
 

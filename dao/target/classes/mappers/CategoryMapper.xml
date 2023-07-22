@@ -11,21 +11,39 @@
             <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="ParentResultMap" type="com.briup.bookstore.vo.CategoryInfoVO">
+        <id property="id" column="pId" jdbcType="INTEGER"/>
+        <result property="name" column="pName" jdbcType="VARCHAR"/>
+        <result property="description" column="pDescription" jdbcType="VARCHAR"/>
+        <result property="parentId" column="pParentId" jdbcType="INTEGER"/>
+        <association property="children" resultMap="ChildrenResultMap"/>
+    </resultMap>
+
+    <resultMap id="ChildrenResultMap" type="com.briup.bookstore.vo.CategoryInfoVO">
+        <id property="id" column="cId" jdbcType="INTEGER"/>
+        <result property="name" column="cName" jdbcType="VARCHAR"/>
+        <result property="description" column="cDescription" jdbcType="VARCHAR"/>
+        <result property="parentId" column="cParentId" jdbcType="INTEGER"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id,name,description,
         parent_id
     </sql>
 
     <!--查询所有分类信息，如果存在分类名称，根据分类名称模糊匹配全部数据-->
-    <select id="selectAllCategoryByName" resultType="com.briup.bookstore.po.Category">
+    <select id="selectAllCategoryByName" resultMap="ParentResultMap">
         SELECT
-            <include refid="Base_Column_List"/>
-        FROM es_category
-        <where>
-            <if test="name != null and name != '' ">
-                AND name LIKE concat('%',#{name},'%')
-            </if>
-        </where>
+            c.id cId,c.`name` cName,c.description cDescription,c.parent_id cParentId,
+            p.id pId,p.`name` pName,p.description pDescription,p.parent_id pParentId
+        FROM
+            es_category c,
+            es_category p
+        WHERE
+            c.parent_id = p.id
+        <if test="name != null and name != ''">
+            AND(p.name LIKE concat('%',#{name},'%') OR c.name LIKE concat('%',#{name},'%'))
+        </if>
     </select>
 
     <!--查询全部分类信息-->
@@ -42,4 +60,11 @@
         FROM es_category
         WHERE id = #{id}
     </select>
+
+    <!--新增分类-->
+    <insert id="insertCategory">
+        INSERT INTO es_category (name, description, parent_id )
+        VALUES
+            (#{name},#{description},#{parentId})
+    </insert>
 </mapper>

@@ -1,6 +1,7 @@
 package com.briup.bookstore.mapper;
 
 import com.briup.bookstore.po.Category;
+import com.briup.bookstore.vo.CategoryInfoVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface CategoryMapper {
      * @Param :name
      * @Return: java.util.List<com.briup.bookstore.po.Category>
      **/
-    List<Category> selectAllCategoryByName(String name);
+    List<CategoryInfoVO> selectAllCategoryByName(String name);
 
     /**
      * @Author qinyc
@@ -43,6 +44,16 @@ public interface CategoryMapper {
      * @Return: com.briup.bookstore.po.Category
      **/
     Category selectCategoryById(Integer id);
+
+    /**
+     * @Author qinyc
+     * @Description 新增分类
+     * @Version: v1.0
+     * @Date 3:56 2023/7/23
+     * @Param :category
+     * @Return: void
+     **/
+    void insertCategory(Category category);
 }
 
 

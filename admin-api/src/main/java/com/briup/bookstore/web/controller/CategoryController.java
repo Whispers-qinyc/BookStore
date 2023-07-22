@@ -1,5 +1,6 @@
 package com.briup.bookstore.web.controller;
 
+import com.briup.bookstore.dto.CategoryAddDTO;
 import com.briup.bookstore.po.Category;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.CategoryService;
@@ -8,10 +9,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -74,5 +72,20 @@ public class CategoryController {
     public Result getCategoryById(@PathVariable("id") Integer id){
         Category category = categoryService.getCategoryById(id);
         return Result.success(category);
+    }
+
+    /**
+     * @Author qinyc
+     * @Description 新增分类
+     * @Version: v1.0
+     * @Date 3:50 2023/7/23
+     * @Param :categoryAddDTO
+     * @Return: com.briup.bookstore.response.Result
+     **/
+    @ApiOperation("新增分类")
+    @PostMapping("/addCategory")
+    public Result addCategory(@RequestBody CategoryAddDTO categoryAddDTO){
+        categoryService.addCategory(categoryAddDTO);
+        return Result.success();
     }
 }

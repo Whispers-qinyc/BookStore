@@ -11,6 +11,10 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  # 忽略 null
+  jackson:
+        default-property-inclusion: non_null
+
 # 配置七牛云OSS对象存储
 oss:
   # 配置AK
