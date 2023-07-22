@@ -67,4 +67,11 @@
         VALUES
             (#{name},#{description},#{parentId})
     </insert>
+
+    <!--根据分类ID更新分类信息-->
+    <update id="updateCategoryById">
+        UPDATE es_category
+        SET name = #{name},description = #{description},parent_id = #{parentId}
+        WHERE id = #{id}
+    </update>
 </mapper>

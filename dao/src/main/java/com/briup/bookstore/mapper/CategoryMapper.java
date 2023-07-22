@@ -54,6 +54,16 @@ public interface CategoryMapper {
      * @Return: void
      **/
     void insertCategory(Category category);
+
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID更新分类信息
+     * @Version: v1.0
+     * @Date 4:25 2023/7/23
+     * @Param :category
+     * @Return: void
+     **/
+    void updateCategoryById(Category category);
 }
 
 

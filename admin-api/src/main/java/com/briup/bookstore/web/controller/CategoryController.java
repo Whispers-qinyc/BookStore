@@ -1,6 +1,7 @@
 package com.briup.bookstore.web.controller;
 
 import com.briup.bookstore.dto.CategoryAddDTO;
+import com.briup.bookstore.dto.CategoryUpdateDTO;
 import com.briup.bookstore.po.Category;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.CategoryService;
@@ -86,6 +87,22 @@ public class CategoryController {
     @PostMapping("/addCategory")
     public Result addCategory(@RequestBody CategoryAddDTO categoryAddDTO){
         categoryService.addCategory(categoryAddDTO);
+        return Result.success();
+    }
+
+
+    /**
+     * @Author qinyc
+     * @Description 修改分类
+     * @Version: v1.0
+     * @Date 4:14 2023/7/23
+     * @Param :categoryUpdateDTO
+     * @Return: com.briup.bookstore.response.Result
+     **/
+    @ApiOperation("修改分类")
+    @PutMapping("/updateCategory")
+    public Result updateCategory(@RequestBody CategoryUpdateDTO categoryUpdateDTO){
+        categoryService.updateCategory(categoryUpdateDTO);
         return Result.success();
     }
 }

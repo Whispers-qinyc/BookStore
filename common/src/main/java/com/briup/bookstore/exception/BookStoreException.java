@@ -87,7 +87,13 @@ public class BookStoreException extends  RuntimeException {
         DELETE_USER_FAIL(513,"删除用户失败，待删除用户存在购物车信息、订单信息、收货地址信息，请检查删除完毕后重试"),
 
         //账号已被封禁，请联系管理员
-        USER_STATUS_CLOSE(514,"账号已被封禁，请联系管理员");
+        USER_STATUS_CLOSE(514,"账号已被封禁，请联系管理员"),
+
+        //分类名称已经存在
+        CATEGORY_NAME_IS_EXIST(601,"分类名称已经存在！"),
+
+        //指定的分类信息不存在
+        CATEGORY_IS_NOT_EXIST(602,"指定的分类信息不存在"),
         ;
 
 
