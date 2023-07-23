@@ -208,6 +208,7 @@ public class LogAspect {
     private void handleAfter(Object ret,Log logPO) {
         // 打印出参
         log.info("Response       : {}", JSON.toJSONString(ret));
+        logPO.setResultJson(JSON.toJSONString(ret));
 
         //为结束时间赋值
         endTime = System.currentTimeMillis();
