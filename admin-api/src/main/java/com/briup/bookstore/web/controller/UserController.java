@@ -1,5 +1,6 @@
 package com.briup.bookstore.web.controller;
 
+import com.briup.bookstore.annotation.SystemLog;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
@@ -99,6 +100,7 @@ public class UserController {
      * @Param :token
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "获取用户个人信息")
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getUserInfo")
     public Result getUserInfo(@RequestHeader("token") @ApiIgnore String token) throws Exception {
