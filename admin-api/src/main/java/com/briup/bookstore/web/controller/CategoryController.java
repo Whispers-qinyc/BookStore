@@ -1,5 +1,6 @@
 package com.briup.bookstore.web.controller;
 
+import com.briup.bookstore.annotation.SystemLog;
 import com.briup.bookstore.dto.CategoryAddDTO;
 import com.briup.bookstore.dto.CategoryUpdateDTO;
 import com.briup.bookstore.po.Category;
@@ -38,6 +39,7 @@ public class CategoryController {
      * @Param :name
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "分页多条件查询分类信息")
     @ApiOperation("分页多条件查询分类信息")
     @GetMapping("/getCategoryPage")
     public Result getCategoryPage(Integer pageNum,Integer pageSize,String name){
@@ -53,6 +55,7 @@ public class CategoryController {
      * @Param : null
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "查询全部分类")
     @ApiOperation("查询全部分类")
     @GetMapping("/getAllCategory")
     public Result getAllCategory(){
@@ -68,6 +71,7 @@ public class CategoryController {
      * @Param :id
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "根据分类ID获取分类信息")
     @ApiOperation("根据分类ID获取分类信息")
     @GetMapping("/getCategoryById/{id}")
     public Result getCategoryById(@PathVariable("id") Integer id){
@@ -83,6 +87,7 @@ public class CategoryController {
      * @Param :categoryAddDTO
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "新增分类")
     @ApiOperation("新增分类")
     @PostMapping("/addCategory")
     public Result addCategory(@RequestBody CategoryAddDTO categoryAddDTO){
@@ -99,6 +104,7 @@ public class CategoryController {
      * @Param :categoryUpdateDTO
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "修改分类")
     @ApiOperation("修改分类")
     @PutMapping("/updateCategory")
     public Result updateCategory(@RequestBody CategoryUpdateDTO categoryUpdateDTO){
@@ -114,6 +120,7 @@ public class CategoryController {
      * @Param :ids
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "删除分类信息(删除+批量删除)")
     @ApiOperation("删除分类信息")
     @DeleteMapping("/deleteCategory/{ids}")
     public Result deleteCategory(@PathVariable("ids") String ids){

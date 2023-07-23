@@ -1,5 +1,7 @@
 package com.briup.bookstore.web.controller;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.briup.bookstore.annotation.SystemLog;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UploadService;
 import io.swagger.annotations.Api;
@@ -32,6 +34,7 @@ public class UploadController {
      * @version: v1.0
      * @Date 22:04 2023/7/18
      **/
+    @SystemLog(businessName = "图片上传接口")
     @ApiOperation("图片上传接口")
     @PostMapping("/upload")
     public Result upload(@RequestPart MultipartFile img){

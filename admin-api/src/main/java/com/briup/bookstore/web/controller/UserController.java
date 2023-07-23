@@ -44,6 +44,7 @@ public class UserController {
      * @Param :endTime
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "分页多条件查询用户信息")
     @ApiOperation("分页多条件查询用户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum",value = "当前页码",required = true),
@@ -69,6 +70,7 @@ public class UserController {
      * @Param :userStatusUpdateDTO
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "修改用户状态")
     @ApiOperation("修改用户状态")
     @PutMapping("/updateUserStatus")
     public Result updateUserStatus(@RequestBody UserStatusUpdateDTO userStatusUpdateDTO){
@@ -84,6 +86,7 @@ public class UserController {
      * @Param :ids
      * @Return: com.briup.bookstore.response.Result
      **/
+    @SystemLog(businessName = "删除与批量删除用户")
     @ApiOperation("删除与批量删除用户")
     @DeleteMapping("/deleteUser/{ids}")
     public Result deleteUser(@PathVariable("ids") String ids){
