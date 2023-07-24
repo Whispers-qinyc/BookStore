@@ -77,6 +77,11 @@ public class Log {
     private String paramsJson;
 
     /**
+     * 响应参数
+     */
+    private String resultJson;
+
+    /**
      * 类地址
      */
     private String classPath;

@@ -17,6 +17,7 @@
             <result property="spendTime" column="spend_time" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="paramsJson" column="params_json" jdbcType="VARCHAR"/>
+            <result property="resultJson" column="result_json" jdbcType="VARCHAR"/>
             <result property="classPath" column="class_path" jdbcType="VARCHAR"/>
             <result property="methodName" column="method_name" jdbcType="VARCHAR"/>
     </resultMap>
@@ -25,15 +26,27 @@
         id,username,business_name,request_url,
         request_method,operation_name,browser_name,ip,
         source,spend_time,create_time,
-        params_json,class_path,method_name
+        params_json,result_json,class_path,method_name
     </sql>
 
+    <!--新增日志-->
     <insert id="insertLog">
         INSERT INTO
             es_log(username,business_name,request_url,
                     request_method,operation_name,browser_name,ip,
                     source,spend_time,
-                    params_json,class_path,method_name)
-        values (#{username},#{businessName},#{requestUrl},#{requestMethod},#{operationName},#{browserName},#{ip},#{source},#{spendTime},#{paramsJson},#{classPath},#{methodName})
+                    params_json,result_json,class_path,method_name)
+        values (#{username},#{businessName},#{requestUrl},#{requestMethod},#{operationName},#{browserName},#{ip},#{source},#{spendTime},#{paramsJson},#{resultJson},#{classPath},#{methodName})
     </insert>
+
+    <!--默认查询全部日志信息，当用户名存在的情况下，需要按照用户名进行模糊查询-->
+    <select id="selectAllLogByUsername" resultType="com.briup.bookstore.po.Log">
+        SELECT <include refid="Base_Column_List"/>
+        FROM es_log
+        <where>
+            <if test="username != null and username != ''">
+                username LIKE concat('%',#{username},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

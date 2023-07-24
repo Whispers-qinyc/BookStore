@@ -1,6 +1,8 @@
 package com.briup.bookstore.aspect;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.briup.bookstore.annotation.SystemLog;
 import com.briup.bookstore.exception.BookStoreException;
 import com.briup.bookstore.mapper.LogMapper;
@@ -179,8 +181,9 @@ public class LogAspect {
         logPO.setSource(ip.getAddr());
 
         // 打印请求入参
-        log.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()) );
-        logPO.setParamsJson(JSON.toJSONString(joinPoint.getArgs()));
+//        log.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()) );
+        log.info("Request Args   : {}", JSONUtil.toJsonStr(joinPoint.getArgs()));
+        logPO.setParamsJson(JSONUtil.toJsonStr(joinPoint.getArgs()));
 
         // 打印描述信息
         log.info("BusinessName   : {}",systemLog.businessName());
@@ -205,6 +208,7 @@ public class LogAspect {
     private void handleAfter(Object ret,Log logPO) {
         // 打印出参
         log.info("Response       : {}", JSON.toJSONString(ret));
+        logPO.setResultJson(JSON.toJSONString(ret));
 
         //为结束时间赋值
         endTime = System.currentTimeMillis();

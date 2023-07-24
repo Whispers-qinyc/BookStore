@@ -114,13 +114,11 @@ public class UserServiceImpl implements UserService{
             registerEndTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
         }
         //开启PageHelper分页插件
-        PageHelper.startPage(pageNum,pageSize,true);
+        PageHelper.startPage(pageNum,pageSize);
         //核心查询
-        List<User> users = userMapper.getAllUserByUsernameOrStatus0rRegisterTime(username, status,registerStartTime,registerEndTime);
-        //Bean拷贝
-        List<UserPageVO> userPageVOS = BeanCopyUtils.copyBeanList(users, UserPageVO.class);
+        List<UserPageVO> users = userMapper.getAllUserByUsernameOrStatus0rRegisterTime(username, status,registerStartTime,registerEndTime);
         //封装在PageInfo对象中
-        PageInfo<UserPageVO> userPageVOPageInfo = new PageInfo<>(userPageVOS);
+        PageInfo<UserPageVO> userPageVOPageInfo = new PageInfo<>(users);
         //返回统一响应结果
         return userPageVOPageInfo;
     }
