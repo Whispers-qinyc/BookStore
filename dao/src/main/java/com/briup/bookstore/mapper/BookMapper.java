@@ -1,7 +1,11 @@
 package com.briup.bookstore.mapper;
 
 
+import com.briup.bookstore.po.Book;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
 * @author qinyc
@@ -11,7 +15,12 @@ import org.springframework.stereotype.Repository;
 */
 @Repository
 public interface BookMapper{
-
+    Book selectBookById(Integer id);
+    void insertBook(Book book);
+    void updateBook(Book book);
+    void deleteBookById(Integer id);
+    void updateBookStatus(@Param("id") Integer id, @Param("status") Integer status);
+    void deleteBookByIds(@Param("ids") List<Integer> ids);
 }
 
 

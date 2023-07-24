@@ -100,6 +100,17 @@ public class BookStoreException extends  RuntimeException {
 
         //删除分类信息失败，待删除分类有关联的图书信息、父分类下有子分类未被删除，请检查删除完毕后重试
         DELETE_CATEGORY_FAIL(604,"删除分类信息失败，待删除分类有关联的图书信息、父分类下有子分类未被删除，请检查删除完毕后重试"),
+
+        BOOK_NOT_EXIST(701, "图书信息不存在，请刷新页面重试"),
+
+        BOOK_NAME_IS_NULL(702, "图书名称为空"),
+
+        BOOK_AUTHOR_IS_NULL(703, "图书作者为空"),
+
+        BOOK_PUBLISHER_IS_NULL(704, "图书出版社为空"),
+
+        CATEGORY_NOT_EXIST(705, "分类信息不存在，图书添加失败")
+
         ;
 
 
