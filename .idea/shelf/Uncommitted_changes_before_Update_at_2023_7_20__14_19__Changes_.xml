@@ -1,0 +1,49 @@
+<changelist name="Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]" date="1689833971402" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023/7/20, 14:19 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="common/target/classes/com/briup/bookstore/utils/JsonWebTokenUtils.class" />
+    <option name="AFTER_PATH" value="common/target/classes/com/briup/bookstore/utils/JsonWebTokenUtils.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/JsonWebTokenUtils.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="dao/target/classes/com/briup/bookstore/mapper/BookMapper.class" />
+    <option name="AFTER_PATH" value="dao/target/classes/com/briup/bookstore/mapper/BookMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/BookMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="admin-api/target/classes/com/briup/bookstore/config/Knife4jConfig.class" />
+    <option name="AFTER_PATH" value="admin-api/target/classes/com/briup/bookstore/config/Knife4jConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/Knife4jConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="common/target/classes/com/briup/bookstore/exception/BookStoreException$CodeMsgEnum.class" />
+    <option name="AFTER_PATH" value="common/target/classes/com/briup/bookstore/exception/BookStoreException$CodeMsgEnum.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/BookStoreException$CodeMsgEnum.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="admin-api/target/classes/com/briup/bookstore/web/interceptor/AdminCheckLoginInterceptor.class" />
+    <option name="AFTER_PATH" value="admin-api/target/classes/com/briup/bookstore/web/interceptor/AdminCheckLoginInterceptor.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/AdminCheckLoginInterceptor.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="service/target/classes/com/briup/bookstore/service/BookService.class" />
+    <option name="AFTER_PATH" value="service/target/classes/com/briup/bookstore/service/BookService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/BookService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="service/target/classes/com/briup/bookstore/service/impl/BookServiceImpl.class" />
+    <option name="AFTER_PATH" value="service/target/classes/com/briup/bookstore/service/impl/BookServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/BookServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="service/target/classes/com/briup/bookstore/service/impl/UserServiceImpl.class" />
+    <option name="AFTER_PATH" value="service/target/classes/com/briup/bookstore/service/impl/UserServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/UserServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="common/target/classes/com/briup/bookstore/utils/BeanCopyUtils.class" />
+    <option name="AFTER_PATH" value="common/target/classes/com/briup/bookstore/utils/BeanCopyUtils.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_7_20,_14_19_[Changes]/BeanCopyUtils.class" />
+  </binary>
+</changelist>
