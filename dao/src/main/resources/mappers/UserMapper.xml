@@ -39,7 +39,7 @@
     </select>
 
     <!--查询全部用户，若存在username，根据username模糊查询，若存在status，根据status精确匹配,registerTime作为范围查询-->
-    <select id="getAllUserByUsernameOrStatus0rRegisterTime" resultType="com.briup.bookstore.vo.UserPageVO">
+    <select id="getAllUserByUsernameOrStatus0rRegisterTime" resultType="com.briup.bookstore.po.User">
         SELECT
         <include refid="Base_Column_List"/>
         FROM

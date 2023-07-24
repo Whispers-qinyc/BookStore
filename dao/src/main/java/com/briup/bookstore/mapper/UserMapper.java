@@ -3,7 +3,6 @@ package com.briup.bookstore.mapper;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.po.User;
-import com.briup.bookstore.vo.UserPageVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -42,7 +41,8 @@ public interface UserMapper {
      * @Param :registerEndTime
      * @Return: java.util.List<com.briup.bookstore.po.User>
      **/
-    List<UserPageVO> getAllUserByUsernameOrStatus0rRegisterTime(@Param("username") String username, @Param("status") String status, @Param("registerStartTime") LocalDateTime registerStartTime, @Param("registerEndTime") LocalDateTime registerEndTime);
+    List<User> getAllUserByUsernameOrStatus0rRegisterTime(@Param("username") String username, @Param("status") String status, @Param("registerStartTime") LocalDateTime registerStartTime, @Param("registerEndTime") LocalDateTime registerEndTime);
+
     /**
      * @Author qinyc
      * @Description 根据用户名查询用户信息条数
