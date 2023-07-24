@@ -43,18 +43,11 @@ public class CategoryServiceImpl implements CategoryService{
     public PageInfo getCategoryPage(Integer pageNum, Integer pageSize, String name) {
         //开启PageHelper分页插件
         PageHelper.startPage(pageNum,pageSize);
-//        //核心查询
-//        List<Category> categories =  categoryMapper.selectAllCategoryByName(name);
-//        //Bean拷贝
-//        List<CategoryInfoVO> categoryInfoVOS = BeanCopyUtils.copyBeanList(categories, CategoryInfoVO.class);
-//        //扁平化数据转换树状数据
-//        categoryInfoVOS = TreeDataUtils.convert(categoryInfoVOS);
-//        //将查询出来的分类集合封装在CategoryPageVO对象中
-//        PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
-//        //返回PageInfo对象
-//        return categoryInfoVOPageInfo;
+        //核心查询
         List<CategoryInfoVO> categoryInfoVOS =  categoryMapper.selectAllCategoryByName(name);
+        //将查询结果封装在PageInfo对象中
         PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
+        //返回PageInfo对象
         return categoryInfoVOPageInfo;
     }
 

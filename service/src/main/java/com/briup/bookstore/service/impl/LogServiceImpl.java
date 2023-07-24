@@ -41,6 +41,7 @@ public class LogServiceImpl implements LogService {
         List<Log> logs =  logMapper.selectAllLogByUsername(username);
         //将查询出来的数据封装在PageInfo对象中
         PageInfo<Log> logPageInfo = new PageInfo<>(logs);
+        //返回PageInfo对象
         return logPageInfo;
     }
 }
