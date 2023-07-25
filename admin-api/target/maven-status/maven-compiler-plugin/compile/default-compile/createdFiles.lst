@@ -1,9 +1,0 @@
-com\briup\bookstore\config\Knife4jConfig.class
-com\briup\bookstore\AdminApiApplication.class
-com\briup\bookstore\config\InterceptorConfig.class
-com\briup\bookstore\web\controller\LoginController.class
-com\briup\bookstore\web\controller\CategoryController.class
-com\briup\bookstore\web\controller\UploadController.class
-com\briup\bookstore\config\WebConfig.class
-com\briup\bookstore\web\interceptor\AdminCheckLoginInterceptor.class
-com\briup\bookstore\web\controller\UserController.class

@@ -1,11 +1,16 @@
 package com.briup.bookstore.web.interceptor;
 
+import com.briup.bookstore.constant.BookStoreConstant;
 import com.briup.bookstore.exception.BookStoreException;
+import com.briup.bookstore.mapper.UserMapper;
+import com.briup.bookstore.service.UserService;
 import com.briup.bookstore.utils.JsonWebTokenUtils;
+import com.briup.bookstore.vo.UserInfoVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -24,6 +29,9 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 @Slf4j
 public class AdminCheckLoginInterceptor implements HandlerInterceptor {
+    @Autowired
+    private UserService userService;
+
     /**
      * @Author qinyc
      * @Description  请求拦截
@@ -47,6 +55,14 @@ public class AdminCheckLoginInterceptor implements HandlerInterceptor {
         try {
             Claims jwt = JsonWebTokenUtils.parseJWT(request.getHeader("token"));
             String userId = jwt.getSubject();
+            //根据用户ID查询用户状态
+            UserInfoVO userInfo = userService.getUserInfo(userId);
+            //判断用户账号状态
+            if (userInfo.getStatus().intValue() == BookStoreConstant.LOGIN_STATUS_CLOSE){
+                //账号已封禁
+                throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_STATUS_CLOSE);
+            }
+            //账号未被封禁将用户
             request.setAttribute("userId",userId);
         } catch (ExpiredJwtException e) {
             //管理员登录过期

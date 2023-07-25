@@ -51,6 +51,11 @@ public class BookStoreConstant {
     public static final int LOGIN_STATUS_CLOSE = 1;
 
     /*
+     * 账号状态为正常状态
+     */
+    public static final int LOGIN_STATUS_OPEN = 0;
+
+    /*
      * 前台登录角色ID
      */
     public static final Integer LOGIN_ADMIN = 1;
