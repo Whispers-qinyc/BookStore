@@ -21,6 +21,16 @@ public interface BookMapper{
     void deleteBookById(Integer id);
     void updateBookStatus(@Param("id") Integer id, @Param("status") Integer status);
     void deleteBookByIds(@Param("ids") List<Integer> ids);
+
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取图书信息
+     * @Version: v1.0
+     * @Date 17:48 2023/7/24
+     * @Param :categoryId
+     * @Return: java.util.List<com.briup.bookstore.po.Book>
+     **/
+    List<Book> selectBooksByCategoryId(Integer categoryId);
 }
 
 

@@ -71,4 +71,12 @@
         where id = #{id}
     </select>
 
+    <!--根据分类ID获取图书信息-->
+    <select id="selectBooksByCategoryId" resultType="com.briup.bookstore.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from es_book
+        where category_id = #{categoryId}
+    </select>
+
 </mapper>

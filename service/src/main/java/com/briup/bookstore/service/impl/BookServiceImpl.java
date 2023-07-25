@@ -101,6 +101,22 @@ public class BookServiceImpl implements BookService{
         bookMapper.updateBookStatus(id,status);
     }
 
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取图书信息
+     * @Version: v1.0
+     * @Date 17:46 2023/7/24
+     * @Param :categoryId
+     * @Return: java.util.List<com.briup.bookstore.po.Book>
+     **/
+    @Override
+    public List<Book> getBooksByCategoryId(Integer categoryId) {
+        List<Book> books = bookMapper.selectBooksByCategoryId(categoryId);
+        return books;
+    }
+
+
+
     // 参数校验方法
     private void validate(Book book) {
         if (!StringUtils.hasText(book.getName())) {

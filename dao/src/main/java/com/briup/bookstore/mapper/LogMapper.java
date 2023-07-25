@@ -2,6 +2,8 @@ package com.briup.bookstore.mapper;
 
 import com.briup.bookstore.po.Log;
 
+import java.util.List;
+
 /**
 * @author qinyc
 * @description 针对表【es_log】的数据库操作Mapper
@@ -19,6 +21,16 @@ public interface LogMapper {
      * @Return: void
      **/
     void insertLog(Log logPO);
+
+    /**
+     * @Author qinyc
+     * @Description 默认查询全部日志信息，当用户名存在的情况下，需要按照用户名进行模糊查询
+     * @Version: v1.0
+     * @Date 9:14 2023/7/25
+     * @Param :username
+     * @Return: java.util.List<com.briup.bookstore.po.Log>
+     **/
+    List<Log> selectAllLogByUsername(String username);
 }
 
 

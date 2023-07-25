@@ -26,4 +26,14 @@ public interface BookService {
     void modifyStatus(Integer id, Integer status);
 
     void removeBatchByIds(List<Integer> ids);
+
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取图书信息
+     * @Version: v1.0
+     * @Date 17:46 2023/7/24
+     * @Param :categoryId
+     * @Return: java.util.List<com.briup.bookstore.po.Book>
+     **/
+    List<Book> getBooksByCategoryId(Integer categoryId);
 }

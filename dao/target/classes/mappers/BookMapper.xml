@@ -5,22 +5,78 @@
 <mapper namespace="com.briup.bookstore.mapper.BookMapper">
 
     <resultMap id="BaseResultMap" type="com.briup.bookstore.po.Book">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="cover" column="cover" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
-            <result property="author" column="author" jdbcType="VARCHAR"/>
-            <result property="publisher" column="publisher" jdbcType="VARCHAR"/>
-            <result property="price" column="price" jdbcType="DOUBLE"/>
-            <result property="storeNum" column="store_num" jdbcType="INTEGER"/>
-            <result property="status" column="status" jdbcType="TINYINT"/>
-            <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="cover" column="cover" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="publisher" column="publisher" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="DOUBLE"/>
+        <result property="storeNum" column="store_num" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,cover,
+        id
+        ,name,cover,
         description,author,publisher,
         price,store_num,status,
         category_id
     </sql>
+
+    <!--添加图书信息-->
+    <insert id="insertBook">
+        insert into es_book(name, cover, description, author, publisher, price, store_num, category_id)
+        values (#{name}, #{cover}, #{description}, #{author}, #{publisher}, #{price}, #{storeNum}, #{categoryId})
+    </insert>
+
+    <!--修改图书信息-->
+    <update id="updateBook">
+        update es_book set name = #{name},
+                           cover = #{cover},
+                           description = #{description},
+                           author = #{author},
+                           publisher = #{publisher},
+                           price = #{price},
+                           store_num = #{storeNum},
+                           category_id = #{categoryId}
+        where id = #{id}
+    </update>
+
+    <!--修改图书状态-->
+    <update id="updateBookStatus">
+        update es_book set status = #{status}
+        where id = #{id}
+    </update>
+
+    <!--根据图书编号删除图书-->
+    <delete id="deleteBookById">
+        delete from es_book where id = #{id}
+    </delete>
+
+    <!--批量删除图书信息-->
+    <delete id="deleteBookByIds">
+        delete from es_book where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--根据图书编号查询图书信息-->
+    <select id="selectBookById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from es_book
+        where id = #{id}
+    </select>
+
+    <!--根据分类ID获取图书信息-->
+    <select id="selectBooksByCategoryId" resultType="com.briup.bookstore.po.Book">
+        select
+        <include refid="Base_Column_List"/>
+        from es_book
+        where category_id = #{categoryId}
+    </select>
+
 </mapper>

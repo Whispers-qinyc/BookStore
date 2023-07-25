@@ -80,4 +80,18 @@ public class BookController {
         return Result.success(bookService.getBookById(id));
     }
 
+    /**
+     * @Author qinyc
+     * @Description 根据分类ID获取图书信息
+     * @Version: v1.0
+     * @Date 17:43 2023/7/24
+     * @Param :categoryId
+     * @Return: com.briup.bookstore.response.Result
+     **/
+    @ApiOperation("根据分类ID获取图书信息")
+    @GetMapping("/getBooksByCategoryId/{categoryId}")
+    public Result getBooksByCategoryId(@PathVariable("categoryId") Integer categoryId){
+        List<Book> books =  bookService.getBooksByCategoryId(categoryId);
+        return Result.success(books);
+    }
 }

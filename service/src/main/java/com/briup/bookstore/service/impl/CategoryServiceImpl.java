@@ -53,8 +53,12 @@ public class CategoryServiceImpl implements CategoryService{
 //        PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
 //        //返回PageInfo对象
 //        return categoryInfoVOPageInfo;
+        //核心查询
         List<CategoryInfoVO> categoryInfoVOS =  categoryMapper.selectAllCategoryByName(name);
+        //封装成PageInfo对象
         PageInfo<CategoryInfoVO> categoryInfoVOPageInfo = new PageInfo<>(categoryInfoVOS);
+        //统计父级分类总条数，最终返回的数据总条数
+//        categoryInfoVOPageInfo.setTotal();
         return categoryInfoVOPageInfo;
     }
 

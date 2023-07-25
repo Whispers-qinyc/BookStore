@@ -36,4 +36,15 @@
                     params_json,class_path,method_name)
         values (#{username},#{businessName},#{requestUrl},#{requestMethod},#{operationName},#{browserName},#{ip},#{source},#{spendTime},#{paramsJson},#{classPath},#{methodName})
     </insert>
+
+    <!--默认查询全部日志信息，当用户名存在的情况下，需要按照用户名进行模糊查询-->
+    <select id="selectAllLogByUsername" resultType="com.briup.bookstore.po.Log">
+        SELECT <include refid="Base_Column_List"/>
+        FROM es_log
+        <where>
+            <if test="username != null and username != ''">
+                username LIKE concat('%',#{username},'%')
+            </if>
+        </where>
+    </select>
 </mapper>
