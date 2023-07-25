@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.bookstore.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.briup.bookstore.po.User">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="CHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="CHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="birthday" column="birthday" jdbcType="DATE"/>
+        <result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="isVip" column="is_vip" jdbcType="BIT"/>
+        <result property="vipExpirationTime" column="vip_expiration_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,password,
+        phone,avatar,gender,
+        status,birthday,register_time,
+        role_id,is_vip,vip_expiration_time
+    </sql>
+
+
+    <!--根据用户名和密码查询指定用户-->
+    <select id="getUserByUsernameAndPassword" resultType="com.briup.bookstore.po.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        es_user
+        WHERE
+        username = #{username}
+        AND password = #{password}
+    </select>
+
+    <!--查询全部用户，若存在username，根据username模糊查询，若存在status，根据status精确匹配,registerTime作为范围查询-->
+    <select id="getAllUserByUsernameOrStatus0rRegisterTime" resultType="com.briup.bookstore.po.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        es_user
+        WHERE 1 = 1
+        <if test="username != null and username != '' ">
+            AND username LIKE concat('%',#{username},'%')
+        </if>
+        <if test="status != null and status != '' ">
+            AND status = #{status}
+        </if>
+        <!--如果只存在开始时间-->
+        <if test="registerStartTime != null  and registerEndTime == null  ">
+            AND register_time >= #{registerStartTime}
+        </if>
+        <!--如果只存在结束时间-->
+        <if test="registerStartTime == null  and registerEndTime != null  ">
+            AND register_time &lt;= #{registerEndTime}
+        </if>
+        <!--如果既存在开始时间，也存在结束时间-->
+        <if test="registerStartTime != null  and registerEndTime != null  ">
+            AND register_time BETWEEN #{registerStartTime} AND #{registerEndTime}
+        </if>
+    </select>
+
+    <!--根据用户名查询用户信息条数-->
+    <select id="getCountByUsername" resultType="java.lang.Integer">
+        SELECT
+            count(*)
+        FROM
+            es_user
+        WHERE
+            username = #{username}
+    </select>
+
+    <!--新增-->
+    <insert id="insertUser" parameterType="com.briup.bookstore.dto.UserRegisterDTO">
+        INSERT INTO
+            es_user( username, `password`, phone, avatar, gender, `status`, birthday, role_id )
+        VALUES
+            (#{username},#{password},#{phone},#{avatar},#{gender},#{status},#{birthday},#{roleId})
+    </insert>
+
+    <!--修改用户状态-->
+    <update id="updateUserStatus" parameterType="com.briup.bookstore.dto.UserStatusUpdateDTO">
+        UPDATE es_user
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+    <!-- 修改用户信息-->
+    <update id="updateUserMessage" parameterType="com.briup.bookstore.dto.UserMessageUpdateDTO">
+        UPDATE es_user
+            SET username = #{username},
+                 `password` = #{password},
+                 phone = #{phone},
+                 avatar = #{avatar},
+                 gender = #{gender},
+                 birthday = #{birthday}
+        WHERE id= #{id}
+    </update>
+
+    <!--删除与批量删除用户-->
+    <delete id="deleteBatchIds">
+        DELETE FROM
+            es_user
+        WHERE id IN (${ids})
+    </delete>
+
+    <!--根据用户ID查询用户信息-->
+    <select id="getUserById" resultType="com.briup.bookstore.po.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from
+        es_user
+        where id = #{id}
+    </select>
+
+
+</mapper>
