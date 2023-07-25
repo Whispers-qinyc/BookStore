@@ -1,9 +1,9 @@
 package com.briup.bookstore.mapper;
 
+import com.briup.bookstore.dto.UserMessageUpdateDTO;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.po.User;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -92,6 +92,8 @@ public interface UserMapper {
      * @Return: com.briup.bookstore.po.User
      **/
     User getUserById(int id);
+
+    User updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO);
 }
 
 

@@ -65,13 +65,13 @@ public class BookStoreException extends  RuntimeException {
         USER_TOKEN_IS_INVALID(506,"无效token"),
 
         //用户ID不能为空
-        USER_ID_IS_NOT_NULL(507,"管理员ID不能为空"),
+        USER_ID_IS_NOT_NULL(507,"用户ID不能为空"),
 
         //用户对象不存在
         USER_IS_NOT_EXIST(508,"管理员对象不存在"),
 
         //用户用户名已存在
-        USER_USERNAME_IS_EXIST(509,"管理员用户名已存在"),
+        USER_USERNAME_IS_EXIST(509,"用户名已经被占用，请更换重试"),
 
         //待删除用户ID集合不能为空
         TO_BE_DELETE_USER_IDS_IS_NOT_NULL(510,"待删除管理员ID集合不能为空"),

@@ -2,6 +2,7 @@ package com.briup.bookstore.service.impl;
 
 import com.briup.bookstore.constant.BookStoreConstant;
 import com.briup.bookstore.dto.UserLoginDTO;
+import com.briup.bookstore.dto.UserMessageUpdateDTO;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.exception.BookStoreException;
@@ -151,7 +152,6 @@ public class UserServiceImpl implements UserService{
         }
         //执行新增用户操作
         userMapper.insertUser(userRegisterDTO);
-        //返回响应成功响应
     }
 
     /**
@@ -206,14 +206,26 @@ public class UserServiceImpl implements UserService{
      * @Return: com.briup.bookstore.vo.UserInfoVO
      **/
     @Override
-    public UserInfoVO getUserInfo(String token) throws Exception {
-        //从token中解析用户id
-        String id = (String) JsonWebTokenUtils.parseJWT(token).get("sub");
+    public UserInfoVO getUserInfo(String id)  {
+
         //根据用户ID查询用户信息
         User user = userMapper.getUserById(Integer.parseInt(id));
         //bean拷贝
         UserInfoVO userInfoVO = BeanCopyUtils.copyBean(user, UserInfoVO.class);
         return userInfoVO;
+    }
+
+    @Override
+    public void updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO) {
+        if (Objects.isNull(userMessageUpdateDTO.getId())){
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_ID_IS_NOT_NULL);
+        }
+        int i = userMapper.getCountByUsername(userMessageUpdateDTO.getUsername());
+
+        if (i>1){
+            throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_USERNAME_IS_EXIST);
+        }
+
     }
 }
 

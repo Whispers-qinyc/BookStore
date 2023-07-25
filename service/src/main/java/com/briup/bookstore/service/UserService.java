@@ -2,6 +2,7 @@ package com.briup.bookstore.service;
 
 
 import com.briup.bookstore.dto.UserLoginDTO;
+import com.briup.bookstore.dto.UserMessageUpdateDTO;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.dto.UserStatusUpdateDTO;
 import com.briup.bookstore.vo.UserInfoVO;
@@ -80,5 +81,12 @@ public interface UserService{
      * @Param :token
      * @Return: com.briup.bookstore.vo.UserInfoVO
      **/
-    UserInfoVO getUserInfo(String token) throws Exception;
+    UserInfoVO getUserInfo(String id) ;
+
+    /**
+     * @Author adam
+     * @param userMessageUpdateDTO 用户信息修改实体
+     * @Date 2023/7/25
+     */
+    void updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO);
 }

@@ -1,16 +1,15 @@
 package com.briup.bookstore.web.controller;
 
+import com.briup.bookstore.constant.BookStoreConstant;
 import com.briup.bookstore.dto.UserLoginDTO;
+import com.briup.bookstore.dto.UserMessageUpdateDTO;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
 import com.briup.bookstore.vo.UserLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -32,13 +31,19 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation("用户登录")
     public Result login(@RequestBody UserLoginDTO userLoginDTO){
-        UserLoginVO userLoginVO = userService.login(userLoginDTO, 1);
+        UserLoginVO userLoginVO = userService.login(userLoginDTO, BookStoreConstant.LOGIN_USER);
         return Result.success(userLoginVO);
     }
     @PostMapping("/register")
     @ApiOperation("新用户注册")
     public Result register(@RequestBody UserRegisterDTO userRegisterDTO){
         userService.register(userRegisterDTO);
+        return Result.success();
+    }
+    @PutMapping("/updateUser")
+    @ApiOperation("用户信息修改")
+        public Result updateUser(@RequestBody UserMessageUpdateDTO userMessageUpdateDTO){
+        userService.updateUserMessage(userMessageUpdateDTO);
         return Result.success();
     }
 }

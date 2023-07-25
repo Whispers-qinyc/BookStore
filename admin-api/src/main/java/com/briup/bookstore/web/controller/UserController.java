@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @className: UserController
@@ -36,12 +35,12 @@ public class UserController {
      * @Description 分页多条件查询用户信息，若存在username，根据username模糊查询，若存在gender，根据gender精确匹配
      * @Version: v1.0
      * @Date 10:21 2023/7/21
-     * @Param :pageNum
-     * @Param :pageSize
-     * @Param :username
-     * @Param :status
-     * @Param :startTime
-     * @Param :endTime
+     * @Param pageNum
+     * @Param pageSize
+     * @Param username
+     * @Param status
+     * @Param startTime
+     * @Param endTime
      * @Return: com.briup.bookstore.response.Result
      **/
     @ApiOperation("分页多条件查询用户信息")
@@ -103,8 +102,8 @@ public class UserController {
     @SystemLog(businessName = "获取用户个人信息")
     @ApiOperation("获取用户个人信息")
     @GetMapping("/getUserInfo")
-    public Result getUserInfo(@RequestHeader("token") @ApiIgnore String token) throws Exception {
-        UserInfoVO userInfo = userService.getUserInfo(token);
+    public Result getUserInfo(@RequestAttribute String userId) throws Exception {
+        UserInfoVO userInfo = userService.getUserInfo(userId);
         return Result.success(userInfo);
     }
 }

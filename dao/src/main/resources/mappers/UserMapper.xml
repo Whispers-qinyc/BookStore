@@ -87,7 +87,31 @@
     <update id="updateUserStatus" parameterType="com.briup.bookstore.dto.UserStatusUpdateDTO">
         UPDATE es_user
         SET status = #{status}
-        where id = #{id}
+        WHERE id = #{id}
+    </update>
+    <!-- 修改用户信息-->
+    <update id="updateUserMessage" parameterType="com.briup.bookstore.dto.UserMessageUpdateDTO">
+        UPDATE es_user
+        <if test="username != null and username != '' ">
+            SET username = #{username} AND
+        </if>
+        <if test="password != null and password != '' ">
+            SET password = #{password} AND
+        </if>
+
+        <if test="phone != null and phone != '' ">
+            SET phone = #{phone} AND
+        </if>
+        <if test="avatar != null and avatar != '' ">
+            SET avatar = #{avatar} AND
+        </if>
+        <if test="gender != null and gender != '' ">
+            SET gender = #{gender} AND
+        </if>
+        <if test="birthday != null and birthday != '' ">
+            SET birthday = #{birthday} AND
+        </if>
+        WHERE id= #{id}
     </update>
 
     <!--删除与批量删除用户-->

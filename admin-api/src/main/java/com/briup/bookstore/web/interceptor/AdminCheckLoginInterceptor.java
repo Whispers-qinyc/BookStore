@@ -2,10 +2,10 @@ package com.briup.bookstore.web.interceptor;
 
 import com.briup.bookstore.exception.BookStoreException;
 import com.briup.bookstore.utils.JsonWebTokenUtils;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
-import org.omg.CORBA.SystemException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -45,7 +45,9 @@ public class AdminCheckLoginInterceptor implements HandlerInterceptor {
         }
         //token存在
         try {
-            JsonWebTokenUtils.parseJWT(request.getHeader("token"));
+            Claims jwt = JsonWebTokenUtils.parseJWT(request.getHeader("token"));
+            String userId = jwt.getSubject();
+            request.setAttribute("userId",userId);
         } catch (ExpiredJwtException e) {
             //管理员登录过期
             throw new BookStoreException(BookStoreException.CodeMsgEnum.USER_LOGIN_TIMEOUT);
