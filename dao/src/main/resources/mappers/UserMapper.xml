@@ -5,18 +5,18 @@
 <mapper namespace="com.briup.bookstore.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="com.briup.bookstore.po.User">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="username" column="username" jdbcType="VARCHAR"/>
-            <result property="password" column="password" jdbcType="VARCHAR"/>
-            <result property="phone" column="phone" jdbcType="CHAR"/>
-            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
-            <result property="gender" column="gender" jdbcType="CHAR"/>
-            <result property="status" column="status" jdbcType="TINYINT"/>
-            <result property="birthday" column="birthday" jdbcType="DATE"/>
-            <result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
-            <result property="roleId" column="role_id" jdbcType="INTEGER"/>
-            <result property="isVip" column="is_vip" jdbcType="BIT"/>
-            <result property="vipExpirationTime" column="vip_expiration_time" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="CHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="gender" column="gender" jdbcType="CHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="birthday" column="birthday" jdbcType="DATE"/>
+        <result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="isVip" column="is_vip" jdbcType="BIT"/>
+        <result property="vipExpirationTime" column="vip_expiration_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -30,12 +30,12 @@
     <!--根据用户名和密码查询指定用户-->
     <select id="getUserByUsernameAndPassword" resultType="com.briup.bookstore.po.User">
         SELECT
-            <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         FROM
-            es_user
+        es_user
         WHERE
-            username = #{username}
-            AND password = #{password}
+        username = #{username}
+        AND password = #{password}
     </select>
 
     <!--查询全部用户，若存在username，根据username模糊查询，若存在status，根据status精确匹配,registerTime作为范围查询-->
@@ -92,25 +92,12 @@
     <!-- 修改用户信息-->
     <update id="updateUserMessage" parameterType="com.briup.bookstore.dto.UserMessageUpdateDTO">
         UPDATE es_user
-        <if test="username != null and username != '' ">
-            SET username = #{username} AND
-        </if>
-        <if test="password != null and password != '' ">
-            SET password = #{password} AND
-        </if>
-
-        <if test="phone != null and phone != '' ">
-            SET phone = #{phone} AND
-        </if>
-        <if test="avatar != null and avatar != '' ">
-            SET avatar = #{avatar} AND
-        </if>
-        <if test="gender != null and gender != '' ">
-            SET gender = #{gender} AND
-        </if>
-        <if test="birthday != null and birthday != '' ">
-            SET birthday = #{birthday} AND
-        </if>
+            SET username = #{username},
+                 `password` = #{password},
+                 phone = #{phone},
+                 avatar = #{avatar},
+                 gender = #{gender},
+                 birthday = #{birthday}
         WHERE id= #{id}
     </update>
 
@@ -124,9 +111,9 @@
     <!--根据用户ID查询用户信息-->
     <select id="getUserById" resultType="com.briup.bookstore.po.User">
         SELECT
-            <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         from
-            es_user
+        es_user
         where id = #{id}
     </select>
 

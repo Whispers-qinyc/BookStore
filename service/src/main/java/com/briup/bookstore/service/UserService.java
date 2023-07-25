@@ -88,5 +88,5 @@ public interface UserService{
      * @param userMessageUpdateDTO 用户信息修改实体
      * @Date 2023/7/25
      */
-    void updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO);
+    UserInfoVO updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO);
 }

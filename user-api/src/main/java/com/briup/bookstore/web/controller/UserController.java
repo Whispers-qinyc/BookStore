@@ -6,6 +6,7 @@ import com.briup.bookstore.dto.UserMessageUpdateDTO;
 import com.briup.bookstore.dto.UserRegisterDTO;
 import com.briup.bookstore.response.Result;
 import com.briup.bookstore.service.UserService;
+import com.briup.bookstore.vo.UserInfoVO;
 import com.briup.bookstore.vo.UserLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,7 +44,13 @@ public class UserController {
     @PutMapping("/updateUser")
     @ApiOperation("用户信息修改")
         public Result updateUser(@RequestBody UserMessageUpdateDTO userMessageUpdateDTO){
-        userService.updateUserMessage(userMessageUpdateDTO);
-        return Result.success();
+        UserInfoVO userMessage = userService.updateUserMessage(userMessageUpdateDTO);
+        return Result.success(userMessage);
+    }
+    @GetMapping("/getUserInfo/{id}")
+    @ApiOperation("获取用户详细信息")
+    public  Result getUserInfo(@PathVariable String id){
+        UserInfoVO vo = userService.getUserInfo(id);
+       return Result.success(vo);
     }
 }

@@ -93,7 +93,7 @@ public interface UserMapper {
      **/
     User getUserById(int id);
 
-    User updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO);
+    void updateUserMessage(UserMessageUpdateDTO userMessageUpdateDTO);
 }
 
 

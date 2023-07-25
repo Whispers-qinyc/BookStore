@@ -32,7 +32,7 @@ public class Result <T>{
     }
 
     //成功静态方法
-    public static <T> Result success(T data) {
+    public static <T> Result<T> success(T data) {
         Result r = new Result();
         r.setCode(200);
         r.setMessage("ok");
